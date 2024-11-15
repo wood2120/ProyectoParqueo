@@ -41,6 +41,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnPago = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.sqlConnection1 = new System.Data.SqlClient.SqlConnection();
             this.SuspendLayout();
             // 
             // listView1
@@ -155,6 +156,12 @@
             this.button1.TabIndex = 19;
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // sqlConnection1
+            // 
+            this.sqlConnection1.ConnectionString = "Data Source=cristofer\\SQLEXPRESS;Initial Catalog=proyecto_parqueo;Integrated Secu" +
+    "rity=True;Encrypt=False";
+            this.sqlConnection1.FireInfoMessageEventOnUserErrors = false;
+            // 
             // Reservar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -193,5 +200,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnPago;
         private System.Windows.Forms.Button button1;
+        public System.Data.SqlClient.SqlConnection sqlConnection1;
     }
 }

@@ -50,6 +50,7 @@
             this.btnReservar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.sqlConnection1 = new System.Data.SqlClient.SqlConnection();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR2)).BeginInit();
@@ -256,6 +257,12 @@
             this.button1.TabIndex = 20;
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // sqlConnection1
+            // 
+            this.sqlConnection1.ConnectionString = "Data Source=cristofer\\SQLEXPRESS;Initial Catalog=proyecto_parqueo;Integrated Secu" +
+    "rity=True;Encrypt=False";
+            this.sqlConnection1.FireInfoMessageEventOnUserErrors = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -283,7 +290,7 @@
             this.Controls.Add(this.picR2);
             this.Controls.Add(this.picR3);
             this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -332,6 +339,7 @@
         private System.Windows.Forms.Button btnReservar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
+        public System.Data.SqlClient.SqlConnection sqlConnection1;
     }
 }
 
