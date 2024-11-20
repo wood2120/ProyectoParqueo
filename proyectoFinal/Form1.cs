@@ -29,10 +29,25 @@ namespace proyectoFinal
 
         private void btnReservar_Click(object sender, EventArgs e)
         {
-
+            frmReservar frmReservar = new frmReservar();
+            frmReservar.ShowDialog();
         }
 
         private void btnPago_Click(object sender, EventArgs e)
+        {
+            pagar_espacio();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Generar_Factura();
+        }
+        private void pagar_espacio()
+        {
+
+        }
+        private void Generar_Factura()
         {
 
         }

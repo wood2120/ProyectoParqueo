@@ -54,11 +54,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reservar.cs">
+    <Compile Include="frmReservar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reservar.Designer.cs">
-      <DependentUpon>Reservar.cs</DependentUpon>
+    <Compile Include="frmReservar.Designer.cs">
+      <DependentUpon>frmReservar.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -72,8 +72,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Reservar.resx">
-      <DependentUpon>Reservar.cs</DependentUpon>
+    <EmbeddedResource Include="frmReservar.resx">
+      <DependentUpon>frmReservar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
