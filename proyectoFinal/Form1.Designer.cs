@@ -49,7 +49,7 @@
             this.btnPago = new System.Windows.Forms.Button();
             this.btnReservar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnfactura = new System.Windows.Forms.Button();
             this.sqlConnection1 = new System.Data.SqlClient.SqlConnection();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR3)).BeginInit();
@@ -245,18 +245,18 @@
     "ora\r\n$15 todo el dia\r\n\r\nCamion:\r\n$4 la hora\r\n$40 todo el dia\r\n\r\nDiscapacitado:\r\n" +
     "$1 la hora\r\n$10 todo el dia\r\n";
             // 
-            // button1
+            // btnfactura
             // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(1029, 449);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 82);
-            this.button1.TabIndex = 20;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnfactura.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnfactura.BackgroundImage")));
+            this.btnfactura.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnfactura.FlatAppearance.BorderSize = 0;
+            this.btnfactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnfactura.Location = new System.Drawing.Point(1029, 449);
+            this.btnfactura.Name = "btnfactura";
+            this.btnfactura.Size = new System.Drawing.Size(91, 82);
+            this.btnfactura.TabIndex = 20;
+            this.btnfactura.UseVisualStyleBackColor = true;
+            this.btnfactura.Click += new System.EventHandler(this.button1_Click);
             // 
             // sqlConnection1
             // 
@@ -270,7 +270,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1180, 637);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnfactura);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnReservar);
             this.Controls.Add(this.btnPago);
@@ -339,7 +339,7 @@
         private System.Windows.Forms.Button btnPago;
         private System.Windows.Forms.Button btnReservar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnfactura;
         public System.Data.SqlClient.SqlConnection sqlConnection1;
     }
 }

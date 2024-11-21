@@ -35,21 +35,17 @@ namespace proyectoFinal
 
         private void btnPago_Click(object sender, EventArgs e)
         {
-            pagar_espacio();
+            frmcobrar frmcobrar = new frmcobrar();
+            frmcobrar.ShowDialog();
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Generar_Factura();
+            frmfactura frmfactura = new frmfactura();
+            frmfactura.ShowDialog();
         }
-        private void pagar_espacio()
-        {
-
-        }
-        private void Generar_Factura()
-        {
-
-        }
+        
+        
     }
 }
