@@ -308,6 +308,11 @@ namespace proyectoFinal
                 }
             }
         }
+
+        private void frmReservar_Load(object sender, EventArgs e)
+        {
+
+        }
     }
     }
     
