@@ -40,6 +40,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.espacios_seleccionar = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.rb_carro = new System.Windows.Forms.RadioButton();
+            this.rb_moto = new System.Windows.Forms.RadioButton();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.rb_discapacitado = new System.Windows.Forms.RadioButton();
+            this.rb_camion = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // txtPlaca
@@ -148,11 +153,63 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // rb_carro
+            // 
+            this.rb_carro.AutoSize = true;
+            this.rb_carro.Location = new System.Drawing.Point(345, 134);
+            this.rb_carro.Name = "rb_carro";
+            this.rb_carro.Size = new System.Drawing.Size(49, 17);
+            this.rb_carro.TabIndex = 23;
+            this.rb_carro.TabStop = true;
+            this.rb_carro.Text = "carro";
+            this.rb_carro.UseVisualStyleBackColor = true;
+            this.rb_carro.CheckedChanged += new System.EventHandler(this.rb_carro_CheckedChanged);
+            // 
+            // rb_moto
+            // 
+            this.rb_moto.AutoSize = true;
+            this.rb_moto.Location = new System.Drawing.Point(345, 157);
+            this.rb_moto.Name = "rb_moto";
+            this.rb_moto.Size = new System.Drawing.Size(48, 17);
+            this.rb_moto.TabIndex = 24;
+            this.rb_moto.TabStop = true;
+            this.rb_moto.Text = "moto";
+            this.rb_moto.UseVisualStyleBackColor = true;
+            this.rb_moto.CheckedChanged += new System.EventHandler(this.rb_moto_CheckedChanged);
+            // 
+            // rb_discapacitado
+            // 
+            this.rb_discapacitado.AutoSize = true;
+            this.rb_discapacitado.Location = new System.Drawing.Point(345, 180);
+            this.rb_discapacitado.Name = "rb_discapacitado";
+            this.rb_discapacitado.Size = new System.Drawing.Size(91, 17);
+            this.rb_discapacitado.TabIndex = 25;
+            this.rb_discapacitado.TabStop = true;
+            this.rb_discapacitado.Text = "discapacitado";
+            this.rb_discapacitado.UseVisualStyleBackColor = true;
+            this.rb_discapacitado.CheckedChanged += new System.EventHandler(this.rb_discapacitado_CheckedChanged);
+            // 
+            // rb_camion
+            // 
+            this.rb_camion.AutoSize = true;
+            this.rb_camion.Location = new System.Drawing.Point(345, 203);
+            this.rb_camion.Name = "rb_camion";
+            this.rb_camion.Size = new System.Drawing.Size(59, 17);
+            this.rb_camion.TabIndex = 26;
+            this.rb_camion.TabStop = true;
+            this.rb_camion.Text = "camion";
+            this.rb_camion.UseVisualStyleBackColor = true;
+            this.rb_camion.CheckedChanged += new System.EventHandler(this.rb_camion_CheckedChanged);
+            // 
             // frmReservar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1043, 581);
+            this.Controls.Add(this.rb_camion);
+            this.Controls.Add(this.rb_discapacitado);
+            this.Controls.Add(this.rb_moto);
+            this.Controls.Add(this.rb_carro);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.espacios_seleccionar);
             this.Controls.Add(this.label2);
@@ -182,5 +239,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox espacios_seleccionar;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RadioButton rb_carro;
+        private System.Windows.Forms.RadioButton rb_moto;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.RadioButton rb_discapacitado;
+        private System.Windows.Forms.RadioButton rb_camion;
     }
 }

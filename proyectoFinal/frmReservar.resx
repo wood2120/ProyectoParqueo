@@ -121,7 +121,7 @@
   <data name="btnPago.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1
-        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACw0AAAsNAe0HwCwAAAAHdElNRQfnCBkCKRSH7E22AAAR
+        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACwwAAAsMAT9AIsgAAAAHdElNRQfnCBkCKRSH7E22AAAR
         RklEQVRoQ+WZCVRV5drHj0VdrRw5wz4cZhAQFFFxwnko/a51+7ppdrMyzZwqM4ebZJqapqkhoDmi4owD
         4AyKIqCIIiijsyKCIPOMisj/+z8bbLp5V3bvXd+31ve4/mt79jn7fX7v/3ned+9z0Py/j0bPaDSK9bOa
         Np2e17T3aqwe5bWc/z8Vny1uoYnIsdJUw1ED9JBTjahn+c9MPfI10EfzAE7q5+Tz/yvR+EWNJvy2iZCd
@@ -255,5 +255,8 @@
   </data>
   <metadata name="sqlConnection1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>154, 17</value>
   </metadata>
 </root>
