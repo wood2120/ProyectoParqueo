@@ -19,10 +19,10 @@ namespace proyectoFinal
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.Button btnActualizar;
-        private System.Windows.Forms.ColumnHeader colFacturaID;
-        private System.Windows.Forms.ColumnHeader colFecha;
+        private System.Windows.Forms.ColumnHeader colIDtipo;
+        private System.Windows.Forms.ColumnHeader colespacio;
+        private System.Windows.Forms.ColumnHeader colTiempo;
         private System.Windows.Forms.ColumnHeader colMonto;
-        private System.Windows.Forms.ColumnHeader colEstado;
 
         protected override void Dispose(bool disposing)
         {
@@ -36,10 +36,10 @@ namespace proyectoFinal
         private void InitializeComponent()
         {
             this.lstfactura = new System.Windows.Forms.ListView();
-            this.colFacturaID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colFecha = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colIDtipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colespacio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colTiempo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colMonto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colEstado = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.sqlConnection1 = new System.Data.SqlClient.SqlConnection();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnCerrar = new System.Windows.Forms.Button();
@@ -49,10 +49,10 @@ namespace proyectoFinal
             // lstfactura
             // 
             this.lstfactura.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colFacturaID,
-            this.colFecha,
-            this.colMonto,
-            this.colEstado});
+            this.colIDtipo,
+            this.colespacio,
+            this.colTiempo,
+            this.colMonto});
             this.lstfactura.HideSelection = false;
             this.lstfactura.Location = new System.Drawing.Point(46, 70);
             this.lstfactura.Name = "lstfactura";
@@ -62,25 +62,25 @@ namespace proyectoFinal
             this.lstfactura.View = System.Windows.Forms.View.Details;
             this.lstfactura.SelectedIndexChanged += new System.EventHandler(this.lstfactura_SelectedIndexChanged);
             // 
-            // colFacturaID
+            // colIDtipo
             // 
-            this.colFacturaID.Text = "Factura ID";
-            this.colFacturaID.Width = 100;
+            this.colIDtipo.Text = "TIpo";
+            this.colIDtipo.Width = 100;
             // 
-            // colFecha
+            // colespacio
             // 
-            this.colFecha.Text = "Fecha";
-            this.colFecha.Width = 150;
+            this.colespacio.Text = "Espacio";
+            this.colespacio.Width = 150;
+            // 
+            // colTiempo
+            // 
+            this.colTiempo.Text = "Tiempo";
+            this.colTiempo.Width = 100;
             // 
             // colMonto
             // 
             this.colMonto.Text = "Monto";
-            this.colMonto.Width = 100;
-            // 
-            // colEstado
-            // 
-            this.colEstado.Text = "Estado";
-            this.colEstado.Width = 150;
+            this.colMonto.Width = 150;
             // 
             // sqlConnection1
             // 
