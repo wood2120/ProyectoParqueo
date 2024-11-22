@@ -14,7 +14,7 @@ namespace proyectoFinal
 {
     public partial class frmfactura : Form
     {
-       /* public frmfactura()
+       /*public frmfactura()
         {
             InitializeComponent();
         }*/

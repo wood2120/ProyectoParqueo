@@ -1,122 +1,153 @@
-﻿namespace proyectoFinal
+﻿using System;
+using System.Windows.Forms;
+
+namespace proyectoFinal
 {
-    partial class frmReservar
+    public partial class frmReservar : Form
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+       
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReservar));
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.lblPlaca = new System.Windows.Forms.Label();
             this.txtPlaca = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnPago = new System.Windows.Forms.Button();
-            this.cancelar_espacio = new System.Windows.Forms.Button();
-            this.sqlConnection1 = new System.Data.SqlClient.SqlConnection();
-            this.label2 = new System.Windows.Forms.Label();
-            this.espacios_seleccionar = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lblTipoVehiculo = new System.Windows.Forms.Label();
             this.rb_carro = new System.Windows.Forms.RadioButton();
             this.rb_moto = new System.Windows.Forms.RadioButton();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.rb_discapacitado = new System.Windows.Forms.RadioButton();
             this.rb_camion = new System.Windows.Forms.RadioButton();
+            this.rb_discapacitado = new System.Windows.Forms.RadioButton();
+            this.lblEspacio = new System.Windows.Forms.Label();
+            this.espacios_seleccionar = new System.Windows.Forms.ComboBox();
+            this.btnReservar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.sqlConnection1 = new System.Data.SqlClient.SqlConnection();
             this.SuspendLayout();
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            this.lblTitulo.ForeColor = System.Drawing.Color.Teal;
+            this.lblTitulo.Location = new System.Drawing.Point(150, 20);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(334, 32);
+            this.lblTitulo.TabIndex = 0;
+            this.lblTitulo.Text = "Reserva de Estacionamiento";
+            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPlaca
+            // 
+            this.lblPlaca.AutoSize = true;
+            this.lblPlaca.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblPlaca.Location = new System.Drawing.Point(50, 80);
+            this.lblPlaca.Name = "lblPlaca";
+            this.lblPlaca.Size = new System.Drawing.Size(137, 21);
+            this.lblPlaca.TabIndex = 1;
+            this.lblPlaca.Text = "Placa del Vehículo:";
             // 
             // txtPlaca
             // 
-            this.txtPlaca.Location = new System.Drawing.Point(112, 59);
+            this.txtPlaca.Location = new System.Drawing.Point(180, 80);
             this.txtPlaca.Name = "txtPlaca";
-            this.txtPlaca.Size = new System.Drawing.Size(145, 20);
-            this.txtPlaca.TabIndex = 1;
+            this.txtPlaca.Size = new System.Drawing.Size(200, 20);
+            this.txtPlaca.TabIndex = 2;
             // 
-            // label1
+            // lblTipoVehiculo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(143, 42);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Placa vehiculo";
+            this.lblTipoVehiculo.AutoSize = true;
+            this.lblTipoVehiculo.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblTipoVehiculo.Location = new System.Drawing.Point(50, 130);
+            this.lblTipoVehiculo.Name = "lblTipoVehiculo";
+            this.lblTipoVehiculo.Size = new System.Drawing.Size(127, 21);
+            this.lblTipoVehiculo.TabIndex = 3;
+            this.lblTipoVehiculo.Text = "Tipo de Vehículo:";
             // 
-            // checkBox1
+            // rb_carro
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(609, 79);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(49, 17);
-            this.checkBox1.TabIndex = 8;
-            this.checkBox1.Text = "Hora";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.rb_carro.AutoSize = true;
+            this.rb_carro.Location = new System.Drawing.Point(180, 130);
+            this.rb_carro.Name = "rb_carro";
+            this.rb_carro.Size = new System.Drawing.Size(50, 17);
+            this.rb_carro.TabIndex = 4;
+            this.rb_carro.TabStop = true;
+            this.rb_carro.Text = "Carro";
+            this.rb_carro.CheckedChanged += new System.EventHandler(this.rb_carro_CheckedChanged_1);
             // 
-            // checkBox2
+            // rb_moto
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(681, 80);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(42, 17);
-            this.checkBox2.TabIndex = 9;
-            this.checkBox2.Text = "Dia";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.rb_moto.AutoSize = true;
+            this.rb_moto.Location = new System.Drawing.Point(240, 130);
+            this.rb_moto.Name = "rb_moto";
+            this.rb_moto.Size = new System.Drawing.Size(49, 17);
+            this.rb_moto.TabIndex = 5;
+            this.rb_moto.TabStop = true;
+            this.rb_moto.Text = "Moto";
+            this.rb_moto.CheckedChanged += new System.EventHandler(this.rb_moto_CheckedChanged);
             // 
-            // label4
+            // rb_camion
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(627, 59);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Tipo de tarifa";
+            this.rb_camion.AutoSize = true;
+            this.rb_camion.Location = new System.Drawing.Point(300, 130);
+            this.rb_camion.Name = "rb_camion";
+            this.rb_camion.Size = new System.Drawing.Size(60, 17);
+            this.rb_camion.TabIndex = 6;
+            this.rb_camion.TabStop = true;
+            this.rb_camion.Text = "Camión";
+            this.rb_camion.CheckedChanged += new System.EventHandler(this.rb_camion_CheckedChanged);
             // 
-            // btnPago
+            // rb_discapacitado
             // 
-            this.btnPago.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPago.BackgroundImage")));
-            this.btnPago.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnPago.FlatAppearance.BorderSize = 0;
-            this.btnPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPago.Location = new System.Drawing.Point(269, 379);
-            this.btnPago.Name = "btnPago";
-            this.btnPago.Size = new System.Drawing.Size(91, 82);
-            this.btnPago.TabIndex = 18;
-            this.btnPago.UseVisualStyleBackColor = true;
-            this.btnPago.Click += new System.EventHandler(this.btnPago_Click);
+            this.rb_discapacitado.AutoSize = true;
+            this.rb_discapacitado.Location = new System.Drawing.Point(370, 130);
+            this.rb_discapacitado.Name = "rb_discapacitado";
+            this.rb_discapacitado.Size = new System.Drawing.Size(93, 17);
+            this.rb_discapacitado.TabIndex = 7;
+            this.rb_discapacitado.TabStop = true;
+            this.rb_discapacitado.Text = "Discapacitado";
+            this.rb_discapacitado.CheckedChanged += new System.EventHandler(this.rb_discapacitado_CheckedChanged);
             // 
-            // cancelar_espacio
+            // lblEspacio
             // 
-            this.cancelar_espacio.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("cancelar_espacio.BackgroundImage")));
-            this.cancelar_espacio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.cancelar_espacio.FlatAppearance.BorderSize = 0;
-            this.cancelar_espacio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelar_espacio.Location = new System.Drawing.Point(567, 393);
-            this.cancelar_espacio.Name = "cancelar_espacio";
-            this.cancelar_espacio.Size = new System.Drawing.Size(77, 68);
-            this.cancelar_espacio.TabIndex = 19;
-            this.cancelar_espacio.UseVisualStyleBackColor = true;
-            this.cancelar_espacio.Click += new System.EventHandler(this.button1_Click);
+            this.lblEspacio.AutoSize = true;
+            this.lblEspacio.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblEspacio.Location = new System.Drawing.Point(50, 180);
+            this.lblEspacio.Name = "lblEspacio";
+            this.lblEspacio.Size = new System.Drawing.Size(65, 21);
+            this.lblEspacio.TabIndex = 8;
+            this.lblEspacio.Text = "Espacio:";
+            // 
+            // espacios_seleccionar
+            // 
+            this.espacios_seleccionar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.espacios_seleccionar.FormattingEnabled = true;
+            this.espacios_seleccionar.Location = new System.Drawing.Point(180, 180);
+            this.espacios_seleccionar.Name = "espacios_seleccionar";
+            this.espacios_seleccionar.Size = new System.Drawing.Size(200, 21);
+            this.espacios_seleccionar.TabIndex = 9;
+            // 
+            // btnReservar
+            // 
+            this.btnReservar.BackColor = System.Drawing.Color.Teal;
+            this.btnReservar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnReservar.ForeColor = System.Drawing.Color.White;
+            this.btnReservar.Location = new System.Drawing.Point(120, 250);
+            this.btnReservar.Name = "btnReservar";
+            this.btnReservar.Size = new System.Drawing.Size(120, 40);
+            this.btnReservar.TabIndex = 10;
+            this.btnReservar.Text = "Reservar";
+            this.btnReservar.UseVisualStyleBackColor = false;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.BackColor = System.Drawing.Color.LightGray;
+            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnCancelar.ForeColor = System.Drawing.Color.Black;
+            this.btnCancelar.Location = new System.Drawing.Point(300, 250);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(120, 40);
+            this.btnCancelar.TabIndex = 11;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = false;
             // 
             // sqlConnection1
             // 
@@ -124,125 +155,40 @@
     "rity=True;Encrypt=False";
             this.sqlConnection1.FireInfoMessageEventOnUserErrors = false;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(158, 134);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "espacio";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // espacios_seleccionar
-            // 
-            this.espacios_seleccionar.FormattingEnabled = true;
-            this.espacios_seleccionar.Location = new System.Drawing.Point(125, 150);
-            this.espacios_seleccionar.Name = "espacios_seleccionar";
-            this.espacios_seleccionar.Size = new System.Drawing.Size(121, 21);
-            this.espacios_seleccionar.TabIndex = 21;
-            this.espacios_seleccionar.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(355, 240);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // rb_carro
-            // 
-            this.rb_carro.AutoSize = true;
-            this.rb_carro.Location = new System.Drawing.Point(345, 134);
-            this.rb_carro.Name = "rb_carro";
-            this.rb_carro.Size = new System.Drawing.Size(49, 17);
-            this.rb_carro.TabIndex = 23;
-            this.rb_carro.TabStop = true;
-            this.rb_carro.Text = "carro";
-            this.rb_carro.UseVisualStyleBackColor = true;
-            this.rb_carro.CheckedChanged += new System.EventHandler(this.rb_carro_CheckedChanged);
-            // 
-            // rb_moto
-            // 
-            this.rb_moto.AutoSize = true;
-            this.rb_moto.Location = new System.Drawing.Point(345, 157);
-            this.rb_moto.Name = "rb_moto";
-            this.rb_moto.Size = new System.Drawing.Size(48, 17);
-            this.rb_moto.TabIndex = 24;
-            this.rb_moto.TabStop = true;
-            this.rb_moto.Text = "moto";
-            this.rb_moto.UseVisualStyleBackColor = true;
-            this.rb_moto.CheckedChanged += new System.EventHandler(this.rb_moto_CheckedChanged);
-            // 
-            // rb_discapacitado
-            // 
-            this.rb_discapacitado.AutoSize = true;
-            this.rb_discapacitado.Location = new System.Drawing.Point(345, 180);
-            this.rb_discapacitado.Name = "rb_discapacitado";
-            this.rb_discapacitado.Size = new System.Drawing.Size(91, 17);
-            this.rb_discapacitado.TabIndex = 25;
-            this.rb_discapacitado.TabStop = true;
-            this.rb_discapacitado.Text = "discapacitado";
-            this.rb_discapacitado.UseVisualStyleBackColor = true;
-            this.rb_discapacitado.CheckedChanged += new System.EventHandler(this.rb_discapacitado_CheckedChanged);
-            // 
-            // rb_camion
-            // 
-            this.rb_camion.AutoSize = true;
-            this.rb_camion.Location = new System.Drawing.Point(345, 203);
-            this.rb_camion.Name = "rb_camion";
-            this.rb_camion.Size = new System.Drawing.Size(59, 17);
-            this.rb_camion.TabIndex = 26;
-            this.rb_camion.TabStop = true;
-            this.rb_camion.Text = "camion";
-            this.rb_camion.UseVisualStyleBackColor = true;
-            this.rb_camion.CheckedChanged += new System.EventHandler(this.rb_camion_CheckedChanged);
-            // 
             // frmReservar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1043, 581);
-            this.Controls.Add(this.rb_camion);
+            this.ClientSize = new System.Drawing.Size(550, 350);
+            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.btnReservar);
+            this.Controls.Add(this.espacios_seleccionar);
+            this.Controls.Add(this.lblEspacio);
             this.Controls.Add(this.rb_discapacitado);
+            this.Controls.Add(this.rb_camion);
             this.Controls.Add(this.rb_moto);
             this.Controls.Add(this.rb_carro);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.espacios_seleccionar);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.cancelar_espacio);
-            this.Controls.Add(this.btnPago);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTipoVehiculo);
             this.Controls.Add(this.txtPlaca);
+            this.Controls.Add(this.lblPlaca);
+            this.Controls.Add(this.lblTitulo);
             this.Name = "frmReservar";
-            this.Text = "Reservar";
+            this.Text = "Reserva de Estacionamiento";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
-        #endregion
+        private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Label lblPlaca;
         private System.Windows.Forms.TextBox txtPlaca;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnPago;
-        private System.Windows.Forms.Button cancelar_espacio;
-        public System.Data.SqlClient.SqlConnection sqlConnection1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox espacios_seleccionar;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblTipoVehiculo;
         private System.Windows.Forms.RadioButton rb_carro;
         private System.Windows.Forms.RadioButton rb_moto;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.RadioButton rb_discapacitado;
         private System.Windows.Forms.RadioButton rb_camion;
+        private System.Windows.Forms.RadioButton rb_discapacitado;
+        private System.Windows.Forms.Label lblEspacio;
+        private System.Windows.Forms.ComboBox espacios_seleccionar;
+        private System.Windows.Forms.Button btnReservar;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Data.SqlClient.SqlConnection sqlConnection1;
     }
 }
