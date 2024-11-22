@@ -20,12 +20,7 @@ namespace proyectoFinal
           
         }
 
-        private void btnPago_Click(object sender, EventArgs e)
-        {
-            Guardar_espacio();
-            
-
-        }
+       
         
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,24 +41,67 @@ namespace proyectoFinal
         } 
         private void Guardar_espacio()
         {
-            sqlConnection1.Open();
-
-            SqlCommand comandoEspacio = new SqlCommand("SP_GUARDAR_ESPACIO", sqlConnection1);
-            comandoEspacio.CommandType = CommandType.StoredProcedure;
-            comandoEspacio.Parameters.AddWithValue("@placa", txtPlaca.Text);
-           comandoEspacio.Parameters.AddWithValue("@tiempo", txtPlaca.Text);
-            comandoEspacio.Parameters.AddWithValue("@espacio", espacios_seleccionar.Text);
-
-            SqlDataReader espacios = comandoEspacio.ExecuteReader();
-
-            if (espacios.Read())
+            try
             {
-               txtPlaca.Text = espacios["placa"].ToString();
-                espacios_seleccionar.Text = espacios["espacio"].ToString();
+                // Abrir conexión
+                sqlConnection1.Open();
+
+                // Crear comando para el procedimiento almacenado
+                SqlCommand comandoEspacio = new SqlCommand("SP_GUARDAR_ESPACIO_PARQUEO", sqlConnection1);
+                comandoEspacio.CommandType = CommandType.StoredProcedure;
+
+                // Parámetros generales
+                comandoEspacio.Parameters.AddWithValue("@placa", string.IsNullOrEmpty(txtPlaca.Text) ? (object)DBNull.Value : txtPlaca.Text);
+                comandoEspacio.Parameters.AddWithValue("@tiempo", string.IsNullOrEmpty(txtTiempo.Text) ? (object)DBNull.Value : txtTiempo.Text);
+                comandoEspacio.Parameters.AddWithValue("@espacio", string.IsNullOrEmpty(espacios_seleccionar.Text) ? (object)DBNull.Value : espacios_seleccionar.Text);
+
+                // Determinar el valor seleccionado para "tipo"
+                string tipoSeleccionado = null;
+                if (rbCarro.Checked)
+                    tipoSeleccionado = rbCarro.Text;
+                else if (rbMoto.Checked)
+                    tipoSeleccionado = rbMoto.Text;
+                else if (rbCamion.Checked)
+                    tipoSeleccionado = rbCamion.Text;
+                else if (rbDiscapacitado.Checked)
+                    tipoSeleccionado = rbDiscapacitado.Text;
+
+                comandoEspacio.Parameters.AddWithValue("@tipo", tipoSeleccionado ?? (object)DBNull.Value);
+
+                // Determinar el valor seleccionado para "tipo_reserva"
+                string tipoReservaSeleccionado = null;
+                if (rb_reservar.Checked)
+                    tipoReservaSeleccionado = rb_reservar.Text;
+                else if (rb_usar.Checked)
+                    tipoReservaSeleccionado = rb_usar.Text;
+
+                comandoEspacio.Parameters.AddWithValue("@tipo_reserva", tipoReservaSeleccionado ?? (object)DBNull.Value);
+
+                // Ejecutar comando
+                SqlDataReader espacios = comandoEspacio.ExecuteReader();
+
+                // Leer resultados y asignar valores a los controles si es necesario
+                if (espacios.Read())
+                {
+                    txtPlaca.Text = espacios["placa"].ToString();
+                    espacios_seleccionar.Text = espacios["espacio"].ToString();
+                }
+
+                // Cerrar lector
+                espacios.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Cerrar conexión
+                if (sqlConnection1.State == ConnectionState.Open)
+                    sqlConnection1.Close();
             }
 
-            sqlConnection1.Close();
-            
+
         }
         private void cancelar()
         {
@@ -85,7 +123,14 @@ namespace proyectoFinal
 
         }
 
-        private void rb_carro_CheckedChanged_1(object sender, EventArgs e)
+
+       
+
+       
+       
+        
+
+        private void rbCarro_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
@@ -142,7 +187,7 @@ namespace proyectoFinal
             }
         }
 
-        private void rb_moto_CheckedChanged(object sender, EventArgs e)
+        private void rbDiscapacitado_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
@@ -153,7 +198,7 @@ namespace proyectoFinal
                 }
 
                 // Configura el comando para ejecutar el procedimiento almacenado
-                SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_MOTO", sqlConnection1);
+                SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_DISCAPACITADO", sqlConnection1);
                 comandoEspacio.CommandType = CommandType.StoredProcedure;
 
                 // Si el procedimiento necesita parámetros, descomenta y ajusta esta línea
@@ -199,7 +244,7 @@ namespace proyectoFinal
             }
         }
 
-        private void rb_camion_CheckedChanged(object sender, EventArgs e)
+        private void rbCamion_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
@@ -256,7 +301,7 @@ namespace proyectoFinal
             }
         }
 
-        private void rb_discapacitado_CheckedChanged(object sender, EventArgs e)
+        private void rbMoto_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
@@ -267,7 +312,7 @@ namespace proyectoFinal
                 }
 
                 // Configura el comando para ejecutar el procedimiento almacenado
-                SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_DISCAPACITADO", sqlConnection1);
+                SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_MOTO", sqlConnection1);
                 comandoEspacio.CommandType = CommandType.StoredProcedure;
 
                 // Si el procedimiento necesita parámetros, descomenta y ajusta esta línea
@@ -311,6 +356,13 @@ namespace proyectoFinal
                     sqlConnection1.Close();
                 }
             }
+        }
+
+        private void btnReservar_Click(object sender, EventArgs e)
+        {
+            Guardar_espacio();
+            MessageBox.Show("Datos guardados");
+            this.Close();
         }
     }
     }
