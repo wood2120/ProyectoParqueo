@@ -23,11 +23,13 @@ namespace proyectoFinal
             this.btnCancelar = new System.Windows.Forms.Button();
             this.sqlConnection1 = new System.Data.SqlClient.SqlConnection();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rb_reservar = new System.Windows.Forms.RadioButton();
+            this.gb_reserva = new System.Windows.Forms.GroupBox();
             this.rb_usar = new System.Windows.Forms.RadioButton();
+            this.rb_reservar = new System.Windows.Forms.RadioButton();
             this.txtTiempo = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
+            this.gb_vehiculo = new System.Windows.Forms.GroupBox();
+            this.gb_reserva.SuspendLayout();
+            this.gb_vehiculo.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -72,7 +74,7 @@ namespace proyectoFinal
             // rbCarro
             // 
             this.rbCarro.AutoSize = true;
-            this.rbCarro.Location = new System.Drawing.Point(180, 130);
+            this.rbCarro.Location = new System.Drawing.Point(0, 25);
             this.rbCarro.Name = "rbCarro";
             this.rbCarro.Size = new System.Drawing.Size(50, 17);
             this.rbCarro.TabIndex = 4;
@@ -83,7 +85,7 @@ namespace proyectoFinal
             // rbMoto
             // 
             this.rbMoto.AutoSize = true;
-            this.rbMoto.Location = new System.Drawing.Point(240, 130);
+            this.rbMoto.Location = new System.Drawing.Point(50, 25);
             this.rbMoto.Name = "rbMoto";
             this.rbMoto.Size = new System.Drawing.Size(49, 17);
             this.rbMoto.TabIndex = 5;
@@ -94,7 +96,7 @@ namespace proyectoFinal
             // rbCamion
             // 
             this.rbCamion.AutoSize = true;
-            this.rbCamion.Location = new System.Drawing.Point(300, 130);
+            this.rbCamion.Location = new System.Drawing.Point(105, 25);
             this.rbCamion.Name = "rbCamion";
             this.rbCamion.Size = new System.Drawing.Size(60, 17);
             this.rbCamion.TabIndex = 6;
@@ -105,7 +107,7 @@ namespace proyectoFinal
             // rbDiscapacitado
             // 
             this.rbDiscapacitado.AutoSize = true;
-            this.rbDiscapacitado.Location = new System.Drawing.Point(370, 130);
+            this.rbDiscapacitado.Location = new System.Drawing.Point(174, 25);
             this.rbDiscapacitado.Name = "rbDiscapacitado";
             this.rbDiscapacitado.Size = new System.Drawing.Size(93, 17);
             this.rbDiscapacitado.TabIndex = 7;
@@ -173,37 +175,37 @@ namespace proyectoFinal
             this.label1.TabIndex = 12;
             this.label1.Text = "Tipo de Reserva :";
             // 
-            // groupBox1
+            // gb_reserva
             // 
-            this.groupBox1.Controls.Add(this.rb_usar);
-            this.groupBox1.Controls.Add(this.rb_reservar);
-            this.groupBox1.Location = new System.Drawing.Point(192, 168);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(228, 39);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            // 
-            // rb_reservar
-            // 
-            this.rb_reservar.AutoSize = true;
-            this.rb_reservar.Location = new System.Drawing.Point(7, 16);
-            this.rb_reservar.Name = "rb_reservar";
-            this.rb_reservar.Size = new System.Drawing.Size(68, 17);
-            this.rb_reservar.TabIndex = 0;
-            this.rb_reservar.TabStop = true;
-            this.rb_reservar.Text = "Reservar";
-            this.rb_reservar.UseVisualStyleBackColor = true;
+            this.gb_reserva.Controls.Add(this.rb_usar);
+            this.gb_reserva.Controls.Add(this.rb_reservar);
+            this.gb_reserva.Location = new System.Drawing.Point(192, 168);
+            this.gb_reserva.Name = "gb_reserva";
+            this.gb_reserva.Size = new System.Drawing.Size(228, 39);
+            this.gb_reserva.TabIndex = 13;
+            this.gb_reserva.TabStop = false;
             // 
             // rb_usar
             // 
             this.rb_usar.AutoSize = true;
             this.rb_usar.Location = new System.Drawing.Point(117, 16);
             this.rb_usar.Name = "rb_usar";
-            this.rb_usar.Size = new System.Drawing.Size(45, 17);
+            this.rb_usar.Size = new System.Drawing.Size(58, 17);
             this.rb_usar.TabIndex = 1;
             this.rb_usar.TabStop = true;
-            this.rb_usar.Text = "usar";
+            this.rb_usar.Text = "Normal";
             this.rb_usar.UseVisualStyleBackColor = true;
+            // 
+            // rb_reservar
+            // 
+            this.rb_reservar.AutoSize = true;
+            this.rb_reservar.Location = new System.Drawing.Point(7, 16);
+            this.rb_reservar.Name = "rb_reservar";
+            this.rb_reservar.Size = new System.Drawing.Size(77, 17);
+            this.rb_reservar.TabIndex = 0;
+            this.rb_reservar.TabStop = true;
+            this.rb_reservar.Text = "Reservado";
+            this.rb_reservar.UseVisualStyleBackColor = true;
             // 
             // txtTiempo
             // 
@@ -212,28 +214,40 @@ namespace proyectoFinal
             this.txtTiempo.Size = new System.Drawing.Size(100, 20);
             this.txtTiempo.TabIndex = 14;
             // 
+            // gb_vehiculo
+            // 
+            this.gb_vehiculo.Controls.Add(this.rbCarro);
+            this.gb_vehiculo.Controls.Add(this.rbMoto);
+            this.gb_vehiculo.Controls.Add(this.rbCamion);
+            this.gb_vehiculo.Controls.Add(this.rbDiscapacitado);
+            this.gb_vehiculo.Location = new System.Drawing.Point(192, 106);
+            this.gb_vehiculo.Name = "gb_vehiculo";
+            this.gb_vehiculo.Size = new System.Drawing.Size(267, 56);
+            this.gb_vehiculo.TabIndex = 15;
+            this.gb_vehiculo.TabStop = false;
+            // 
             // frmReservar
             // 
             this.ClientSize = new System.Drawing.Size(550, 350);
+            this.Controls.Add(this.gb_vehiculo);
             this.Controls.Add(this.txtTiempo);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gb_reserva);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnReservar);
             this.Controls.Add(this.espacios_seleccionar);
             this.Controls.Add(this.lblEspacio);
-            this.Controls.Add(this.rbDiscapacitado);
-            this.Controls.Add(this.rbCamion);
-            this.Controls.Add(this.rbMoto);
-            this.Controls.Add(this.rbCarro);
             this.Controls.Add(this.lblTipoVehiculo);
             this.Controls.Add(this.txtPlaca);
             this.Controls.Add(this.lblPlaca);
             this.Controls.Add(this.lblTitulo);
             this.Name = "frmReservar";
             this.Text = "Reserva de Estacionamiento";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Load += new System.EventHandler(this.frmReservar_Load_1);
+            this.gb_reserva.ResumeLayout(false);
+            this.gb_reserva.PerformLayout();
+            this.gb_vehiculo.ResumeLayout(false);
+            this.gb_vehiculo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -253,9 +267,10 @@ namespace proyectoFinal
         private System.Windows.Forms.Button btnCancelar;
         private System.Data.SqlClient.SqlConnection sqlConnection1;
         private Label label1;
-        private GroupBox groupBox1;
+        private GroupBox gb_reserva;
         private RadioButton rb_usar;
         private RadioButton rb_reservar;
         private TextBox txtTiempo;
+        private GroupBox gb_vehiculo;
     }
 }

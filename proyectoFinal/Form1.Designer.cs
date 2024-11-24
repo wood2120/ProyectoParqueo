@@ -79,6 +79,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(952, 639);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // picR3
             // 
@@ -87,6 +88,7 @@
             this.picR3.Size = new System.Drawing.Size(57, 52);
             this.picR3.TabIndex = 1;
             this.picR3.TabStop = false;
+            this.picR3.Click += new System.EventHandler(this.picR3_Click);
             // 
             // picR2
             // 
@@ -95,6 +97,7 @@
             this.picR2.Size = new System.Drawing.Size(57, 52);
             this.picR2.TabIndex = 2;
             this.picR2.TabStop = false;
+            this.picR2.Click += new System.EventHandler(this.picR2_Click);
             // 
             // picR5
             // 
@@ -103,6 +106,7 @@
             this.picR5.Size = new System.Drawing.Size(57, 52);
             this.picR5.TabIndex = 3;
             this.picR5.TabStop = false;
+            this.picR5.Click += new System.EventHandler(this.picR5_Click);
             // 
             // picR4
             // 
@@ -111,6 +115,7 @@
             this.picR4.Size = new System.Drawing.Size(57, 52);
             this.picR4.TabIndex = 4;
             this.picR4.TabStop = false;
+            this.picR4.Click += new System.EventHandler(this.picR4_Click);
             // 
             // picR1
             // 
@@ -119,6 +124,7 @@
             this.picR1.Size = new System.Drawing.Size(57, 52);
             this.picR1.TabIndex = 5;
             this.picR1.TabStop = false;
+            this.picR1.Click += new System.EventHandler(this.picR1_Click);
             // 
             // picC1
             // 
@@ -127,6 +133,7 @@
             this.picC1.Size = new System.Drawing.Size(57, 52);
             this.picC1.TabIndex = 6;
             this.picC1.TabStop = false;
+            this.picC1.Click += new System.EventHandler(this.picC1_Click);
             // 
             // picD2
             // 
@@ -135,6 +142,7 @@
             this.picD2.Size = new System.Drawing.Size(57, 52);
             this.picD2.TabIndex = 7;
             this.picD2.TabStop = false;
+            this.picD2.Click += new System.EventHandler(this.picD2_Click);
             // 
             // picD1
             // 
@@ -143,6 +151,7 @@
             this.picD1.Size = new System.Drawing.Size(57, 52);
             this.picD1.TabIndex = 8;
             this.picD1.TabStop = false;
+            this.picD1.Click += new System.EventHandler(this.picD1_Click);
             // 
             // picM4
             // 
@@ -151,6 +160,7 @@
             this.picM4.Size = new System.Drawing.Size(28, 27);
             this.picM4.TabIndex = 9;
             this.picM4.TabStop = false;
+            this.picM4.Click += new System.EventHandler(this.picM4_Click);
             // 
             // picM3
             // 
@@ -159,6 +169,7 @@
             this.picM3.Size = new System.Drawing.Size(28, 27);
             this.picM3.TabIndex = 10;
             this.picM3.TabStop = false;
+            this.picM3.Click += new System.EventHandler(this.picM3_Click);
             // 
             // picM6
             // 
@@ -167,6 +178,7 @@
             this.picM6.Size = new System.Drawing.Size(28, 27);
             this.picM6.TabIndex = 11;
             this.picM6.TabStop = false;
+            this.picM6.Click += new System.EventHandler(this.picM6_Click);
             // 
             // picM5
             // 
@@ -175,6 +187,7 @@
             this.picM5.Size = new System.Drawing.Size(28, 27);
             this.picM5.TabIndex = 12;
             this.picM5.TabStop = false;
+            this.picM5.Click += new System.EventHandler(this.picM5_Click);
             // 
             // picM7
             // 
@@ -183,6 +196,7 @@
             this.picM7.Size = new System.Drawing.Size(28, 27);
             this.picM7.TabIndex = 13;
             this.picM7.TabStop = false;
+            this.picM7.Click += new System.EventHandler(this.picM7_Click);
             // 
             // picM2
             // 
@@ -191,6 +205,7 @@
             this.picM2.Size = new System.Drawing.Size(28, 27);
             this.picM2.TabIndex = 14;
             this.picM2.TabStop = false;
+            this.picM2.Click += new System.EventHandler(this.picM2_Click);
             // 
             // picM1
             // 
@@ -199,6 +214,7 @@
             this.picM1.Size = new System.Drawing.Size(28, 27);
             this.picM1.TabIndex = 15;
             this.picM1.TabStop = false;
+            this.picM1.Click += new System.EventHandler(this.picM1_Click);
             // 
             // picM8
             // 
@@ -207,6 +223,7 @@
             this.picM8.Size = new System.Drawing.Size(28, 27);
             this.picM8.TabIndex = 16;
             this.picM8.TabStop = false;
+            this.picM8.Click += new System.EventHandler(this.picM8_Click);
             // 
             // btnPago
             // 

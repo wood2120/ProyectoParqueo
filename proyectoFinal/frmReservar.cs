@@ -43,19 +43,16 @@ namespace proyectoFinal
         {
             try
             {
-                // Abrir conexión
+               
                 sqlConnection1.Open();
 
-                // Crear comando para el procedimiento almacenado
                 SqlCommand comandoEspacio = new SqlCommand("SP_GUARDAR_ESPACIO_PARQUEO", sqlConnection1);
                 comandoEspacio.CommandType = CommandType.StoredProcedure;
 
-                // Parámetros generales
                 comandoEspacio.Parameters.AddWithValue("@placa", string.IsNullOrEmpty(txtPlaca.Text) ? (object)DBNull.Value : txtPlaca.Text);
                 comandoEspacio.Parameters.AddWithValue("@tiempo", string.IsNullOrEmpty(txtTiempo.Text) ? (object)DBNull.Value : txtTiempo.Text);
                 comandoEspacio.Parameters.AddWithValue("@espacio", string.IsNullOrEmpty(espacios_seleccionar.Text) ? (object)DBNull.Value : espacios_seleccionar.Text);
 
-                // Determinar el valor seleccionado para "tipo"
                 string tipoSeleccionado = null;
                 if (rbCarro.Checked)
                     tipoSeleccionado = rbCarro.Text;
@@ -68,7 +65,6 @@ namespace proyectoFinal
 
                 comandoEspacio.Parameters.AddWithValue("@tipo", tipoSeleccionado ?? (object)DBNull.Value);
 
-                // Determinar el valor seleccionado para "tipo_reserva"
                 string tipoReservaSeleccionado = null;
                 if (rb_reservar.Checked)
                     tipoReservaSeleccionado = rb_reservar.Text;
@@ -77,17 +73,14 @@ namespace proyectoFinal
 
                 comandoEspacio.Parameters.AddWithValue("@tipo_reserva", tipoReservaSeleccionado ?? (object)DBNull.Value);
 
-                // Ejecutar comando
                 SqlDataReader espacios = comandoEspacio.ExecuteReader();
 
-                // Leer resultados y asignar valores a los controles si es necesario
                 if (espacios.Read())
                 {
                     txtPlaca.Text = espacios["placa"].ToString();
                     espacios_seleccionar.Text = espacios["espacio"].ToString();
                 }
 
-                // Cerrar lector
                 espacios.Close();
             }
             catch (Exception ex)
@@ -96,18 +89,19 @@ namespace proyectoFinal
             }
             finally
             {
-                // Cerrar conexión
+                
                 if (sqlConnection1.State == ConnectionState.Open)
                     sqlConnection1.Close();
             }
-
 
         }
         private void cancelar()
         {
             
                 txtPlaca.Clear();
-              
+                espacios_seleccionar.Select();
+                //gb_vehiculo.Checked = false;
+                //gb_reserva.Enabled = false;
                 txtPlaca.Focus();
             
         }
@@ -117,46 +111,31 @@ namespace proyectoFinal
             
         }
 
-
         private void frmReservar_Load(object sender, EventArgs e)
         {
 
         }
 
-
-       
-
-       
-       
-        
-
         private void rbCarro_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
-                // Asegúrate de que la conexión esté abierta
+                
                 if (sqlConnection1.State != ConnectionState.Open)
                 {
                     sqlConnection1.Open();
                 }
 
-                // Configura el comando para ejecutar el procedimiento almacenado
                 SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_CARRO", sqlConnection1);
                 comandoEspacio.CommandType = CommandType.StoredProcedure;
 
-                // Si el procedimiento necesita parámetros, descomenta y ajusta esta línea
-                // comandoEspacio.Parameters.AddWithValue("@espacio", algunValor);
-
-                // Ejecuta el procedimiento y obtiene un SqlDataReader
                 SqlDataReader espacioReader = comandoEspacio.ExecuteReader();
 
-                // Limpia el ComboBox antes de agregar nuevos elementos
                 espacios_seleccionar.Items.Clear();
 
-                // Verifica si hay datos y agrega los elementos al ComboBox
                 while (espacioReader.Read())
                 {
-                    // Verifica si la columna "espacio" existe en el resultado
+                    
                     if (espacioReader["espacio"] != DBNull.Value)
                     {
                         espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
@@ -191,39 +170,30 @@ namespace proyectoFinal
         {
             try
             {
-                // Asegúrate de que la conexión esté abierta
+
                 if (sqlConnection1.State != ConnectionState.Open)
                 {
                     sqlConnection1.Open();
                 }
 
-                // Configura el comando para ejecutar el procedimiento almacenado
                 SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_DISCAPACITADO", sqlConnection1);
                 comandoEspacio.CommandType = CommandType.StoredProcedure;
 
-                // Si el procedimiento necesita parámetros, descomenta y ajusta esta línea
-                // comandoEspacio.Parameters.AddWithValue("@espacio", algunValor);
-
-                // Ejecuta el procedimiento y obtiene un SqlDataReader
                 SqlDataReader espacioReader = comandoEspacio.ExecuteReader();
 
-                // Limpia el ComboBox antes de agregar nuevos elementos
                 espacios_seleccionar.Items.Clear();
 
-                // Verifica si hay datos y agrega los elementos al ComboBox
                 while (espacioReader.Read())
                 {
-                    // Verifica si la columna "espacio" existe en el resultado
+
                     if (espacioReader["espacio"] != DBNull.Value)
                     {
                         espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
                     }
                 }
 
-                // Cierra el DataReader
                 espacioReader.Close();
 
-                // Verifica si no se encontraron espacios
                 if (espacios_seleccionar.Items.Count == 0)
                 {
                     MessageBox.Show("No se encontraron espacios disponibles.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -231,12 +201,12 @@ namespace proyectoFinal
             }
             catch (Exception ex)
             {
-                // Muestra un mensaje de error en caso de fallo
+               
                 MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                // Asegúrate de cerrar la conexión si está abierta
+              
                 if (sqlConnection1.State == ConnectionState.Open)
                 {
                     sqlConnection1.Close();
@@ -248,39 +218,30 @@ namespace proyectoFinal
         {
             try
             {
-                // Asegúrate de que la conexión esté abierta
+                
                 if (sqlConnection1.State != ConnectionState.Open)
                 {
                     sqlConnection1.Open();
                 }
 
-                // Configura el comando para ejecutar el procedimiento almacenado
                 SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_CAMION", sqlConnection1);
                 comandoEspacio.CommandType = CommandType.StoredProcedure;
 
-                // Si el procedimiento necesita parámetros, descomenta y ajusta esta línea
-                // comandoEspacio.Parameters.AddWithValue("@espacio", algunValor);
-
-                // Ejecuta el procedimiento y obtiene un SqlDataReader
                 SqlDataReader espacioReader = comandoEspacio.ExecuteReader();
 
-                // Limpia el ComboBox antes de agregar nuevos elementos
                 espacios_seleccionar.Items.Clear();
 
-                // Verifica si hay datos y agrega los elementos al ComboBox
                 while (espacioReader.Read())
                 {
-                    // Verifica si la columna "espacio" existe en el resultado
+                    
                     if (espacioReader["espacio"] != DBNull.Value)
                     {
                         espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
                     }
                 }
 
-                // Cierra el DataReader
                 espacioReader.Close();
 
-                // Verifica si no se encontraron espacios
                 if (espacios_seleccionar.Items.Count == 0)
                 {
                     MessageBox.Show("No se encontraron espacios disponibles.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -288,12 +249,11 @@ namespace proyectoFinal
             }
             catch (Exception ex)
             {
-                // Muestra un mensaje de error en caso de fallo
+                
                 MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                // Asegúrate de cerrar la conexión si está abierta
                 if (sqlConnection1.State == ConnectionState.Open)
                 {
                     sqlConnection1.Close();
@@ -305,39 +265,28 @@ namespace proyectoFinal
         {
             try
             {
-                // Asegúrate de que la conexión esté abierta
                 if (sqlConnection1.State != ConnectionState.Open)
                 {
                     sqlConnection1.Open();
                 }
 
-                // Configura el comando para ejecutar el procedimiento almacenado
                 SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_MOTO", sqlConnection1);
                 comandoEspacio.CommandType = CommandType.StoredProcedure;
 
-                // Si el procedimiento necesita parámetros, descomenta y ajusta esta línea
-                // comandoEspacio.Parameters.AddWithValue("@espacio", algunValor);
-
-                // Ejecuta el procedimiento y obtiene un SqlDataReader
                 SqlDataReader espacioReader = comandoEspacio.ExecuteReader();
 
-                // Limpia el ComboBox antes de agregar nuevos elementos
                 espacios_seleccionar.Items.Clear();
 
-                // Verifica si hay datos y agrega los elementos al ComboBox
                 while (espacioReader.Read())
                 {
-                    // Verifica si la columna "espacio" existe en el resultado
                     if (espacioReader["espacio"] != DBNull.Value)
                     {
                         espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
                     }
                 }
 
-                // Cierra el DataReader
                 espacioReader.Close();
 
-                // Verifica si no se encontraron espacios
                 if (espacios_seleccionar.Items.Count == 0)
                 {
                     MessageBox.Show("No se encontraron espacios disponibles.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -345,12 +294,12 @@ namespace proyectoFinal
             }
             catch (Exception ex)
             {
-                // Muestra un mensaje de error en caso de fallo
+
                 MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                // Asegúrate de cerrar la conexión si está abierta
+
                 if (sqlConnection1.State == ConnectionState.Open)
                 {
                     sqlConnection1.Close();
@@ -363,6 +312,11 @@ namespace proyectoFinal
             Guardar_espacio();
             MessageBox.Show("Datos guardados");
             this.Close();
+        }
+
+        private void frmReservar_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
     }
