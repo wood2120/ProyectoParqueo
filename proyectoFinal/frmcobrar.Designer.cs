@@ -62,12 +62,13 @@ namespace proyectoFinal
             // 
             this.lblMonto.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.lblMonto.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblMonto.Location = new System.Drawing.Point(250, 80);
+            this.lblMonto.Location = new System.Drawing.Point(159, 82);
             this.lblMonto.Name = "lblMonto";
-            this.lblMonto.Size = new System.Drawing.Size(300, 30);
+            this.lblMonto.Size = new System.Drawing.Size(197, 30);
             this.lblMonto.TabIndex = 1;
-            this.lblMonto.Text = "Monto a Cobrar: $0.00";
+            this.lblMonto.Text = "Monto a Cobrar: $";
             this.lblMonto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMonto.Click += new System.EventHandler(this.lblMonto_Click);
             // 
             // lblDato
             // 
@@ -89,6 +90,7 @@ namespace proyectoFinal
             this.lblEspacioSeleccionado.TabIndex = 3;
             this.lblEspacioSeleccionado.Text = "Espacio seleccionado: Ninguno";
             this.lblEspacioSeleccionado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblEspacioSeleccionado.Click += new System.EventHandler(this.lblEspacioSeleccionado_Click);
             // 
             // btnCobrar
             // 
@@ -129,6 +131,7 @@ namespace proyectoFinal
             this.Controls.Add(this.lblTitulo);
             this.Name = "frmcobrar";
             this.Text = "Cobrar";
+            this.Load += new System.EventHandler(this.frmcobrar_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 

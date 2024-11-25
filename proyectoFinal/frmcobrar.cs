@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace proyectoFinal
             MessageBox.Show("Pago confirmado correctamente.", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        
+
 
         private void lblDato_Click(object sender, EventArgs e)
         {
@@ -35,7 +36,24 @@ namespace proyectoFinal
 
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
-this.Close(); // Cierra la ventana actual
+            this.Close(); // Cierra la ventana actual
+        }
+
+        private void frmcobrar_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblEspacioSeleccionado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblMonto_Click(object sender, EventArgs e)
+        {
+
+
+
         }
     }
 }

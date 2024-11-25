@@ -44,11 +44,13 @@ namespace proyectoFinal
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnActualizar = new System.Windows.Forms.Button();
+            this.clPlaca = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lstfactura
             // 
             this.lstfactura.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.clPlaca,
             this.colIDtipo,
             this.colespacio,
             this.colTiempo,
@@ -64,21 +66,25 @@ namespace proyectoFinal
             // 
             // colIDtipo
             // 
+            this.colIDtipo.DisplayIndex = 0;
             this.colIDtipo.Text = "TIpo";
             this.colIDtipo.Width = 100;
             // 
             // colespacio
             // 
+            this.colespacio.DisplayIndex = 1;
             this.colespacio.Text = "Espacio";
             this.colespacio.Width = 150;
             // 
             // colTiempo
             // 
+            this.colTiempo.DisplayIndex = 2;
             this.colTiempo.Text = "Tiempo";
             this.colTiempo.Width = 100;
             // 
             // colMonto
             // 
+            this.colMonto.DisplayIndex = 3;
             this.colMonto.Text = "Monto";
             this.colMonto.Width = 150;
             // 
@@ -124,6 +130,11 @@ namespace proyectoFinal
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = false;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
+            // clPlaca
+            // 
+            this.clPlaca.DisplayIndex = 4;
+            this.clPlaca.Text = "Placa";
             // 
             // frmfactura
             // 
@@ -190,5 +201,7 @@ namespace proyectoFinal
                 MessageBox.Show("Factura seleccionada: " + selectedItem.Text);
             }
         }
+
+        private ColumnHeader clPlaca;
     }
 }

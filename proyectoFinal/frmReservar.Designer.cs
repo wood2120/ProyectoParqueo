@@ -28,8 +28,13 @@ namespace proyectoFinal
             this.rb_reservar = new System.Windows.Forms.RadioButton();
             this.txtTiempo = new System.Windows.Forms.TextBox();
             this.gb_vehiculo = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.gb_horario = new System.Windows.Forms.GroupBox();
+            this.rb_hora = new System.Windows.Forms.RadioButton();
+            this.rb_dia = new System.Windows.Forms.RadioButton();
             this.gb_reserva.SuspendLayout();
             this.gb_vehiculo.SuspendLayout();
+            this.gb_horario.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -119,7 +124,7 @@ namespace proyectoFinal
             // 
             this.lblEspacio.AutoSize = true;
             this.lblEspacio.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblEspacio.Location = new System.Drawing.Point(50, 213);
+            this.lblEspacio.Location = new System.Drawing.Point(56, 279);
             this.lblEspacio.Name = "lblEspacio";
             this.lblEspacio.Size = new System.Drawing.Size(65, 21);
             this.lblEspacio.TabIndex = 8;
@@ -129,7 +134,7 @@ namespace proyectoFinal
             // 
             this.espacios_seleccionar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.espacios_seleccionar.FormattingEnabled = true;
-            this.espacios_seleccionar.Location = new System.Drawing.Point(180, 213);
+            this.espacios_seleccionar.Location = new System.Drawing.Point(186, 279);
             this.espacios_seleccionar.Name = "espacios_seleccionar";
             this.espacios_seleccionar.Size = new System.Drawing.Size(200, 21);
             this.espacios_seleccionar.TabIndex = 9;
@@ -139,7 +144,7 @@ namespace proyectoFinal
             this.btnReservar.BackColor = System.Drawing.Color.Teal;
             this.btnReservar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnReservar.ForeColor = System.Drawing.Color.White;
-            this.btnReservar.Location = new System.Drawing.Point(120, 283);
+            this.btnReservar.Location = new System.Drawing.Point(126, 349);
             this.btnReservar.Name = "btnReservar";
             this.btnReservar.Size = new System.Drawing.Size(120, 40);
             this.btnReservar.TabIndex = 10;
@@ -152,7 +157,7 @@ namespace proyectoFinal
             this.btnCancelar.BackColor = System.Drawing.Color.LightGray;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.Color.Black;
-            this.btnCancelar.Location = new System.Drawing.Point(300, 283);
+            this.btnCancelar.Location = new System.Drawing.Point(306, 349);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(120, 40);
             this.btnCancelar.TabIndex = 11;
@@ -169,7 +174,7 @@ namespace proyectoFinal
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label1.Location = new System.Drawing.Point(50, 168);
+            this.label1.Location = new System.Drawing.Point(56, 234);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(127, 21);
             this.label1.TabIndex = 12;
@@ -179,7 +184,7 @@ namespace proyectoFinal
             // 
             this.gb_reserva.Controls.Add(this.rb_usar);
             this.gb_reserva.Controls.Add(this.rb_reservar);
-            this.gb_reserva.Location = new System.Drawing.Point(192, 168);
+            this.gb_reserva.Location = new System.Drawing.Point(198, 234);
             this.gb_reserva.Name = "gb_reserva";
             this.gb_reserva.Size = new System.Drawing.Size(228, 39);
             this.gb_reserva.TabIndex = 13;
@@ -209,7 +214,7 @@ namespace proyectoFinal
             // 
             // txtTiempo
             // 
-            this.txtTiempo.Location = new System.Drawing.Point(180, 241);
+            this.txtTiempo.Location = new System.Drawing.Point(186, 307);
             this.txtTiempo.Name = "txtTiempo";
             this.txtTiempo.Size = new System.Drawing.Size(100, 20);
             this.txtTiempo.TabIndex = 14;
@@ -226,9 +231,51 @@ namespace proyectoFinal
             this.gb_vehiculo.TabIndex = 15;
             this.gb_vehiculo.TabStop = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label2.Location = new System.Drawing.Point(60, 185);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(63, 21);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Horario";
+            // 
+            // gb_horario
+            // 
+            this.gb_horario.Controls.Add(this.rb_hora);
+            this.gb_horario.Controls.Add(this.rb_dia);
+            this.gb_horario.Location = new System.Drawing.Point(186, 175);
+            this.gb_horario.Name = "gb_horario";
+            this.gb_horario.Size = new System.Drawing.Size(267, 56);
+            this.gb_horario.TabIndex = 17;
+            this.gb_horario.TabStop = false;
+            // 
+            // rb_hora
+            // 
+            this.rb_hora.AutoSize = true;
+            this.rb_hora.Location = new System.Drawing.Point(19, 25);
+            this.rb_hora.Name = "rb_hora";
+            this.rb_hora.Size = new System.Drawing.Size(48, 17);
+            this.rb_hora.TabIndex = 6;
+            this.rb_hora.TabStop = true;
+            this.rb_hora.Text = "Hora";
+            // 
+            // rb_dia
+            // 
+            this.rb_dia.AutoSize = true;
+            this.rb_dia.Location = new System.Drawing.Point(94, 25);
+            this.rb_dia.Name = "rb_dia";
+            this.rb_dia.Size = new System.Drawing.Size(80, 17);
+            this.rb_dia.TabIndex = 7;
+            this.rb_dia.TabStop = true;
+            this.rb_dia.Text = "Todo el día";
+            // 
             // frmReservar
             // 
-            this.ClientSize = new System.Drawing.Size(550, 350);
+            this.ClientSize = new System.Drawing.Size(632, 453);
+            this.Controls.Add(this.gb_horario);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.gb_vehiculo);
             this.Controls.Add(this.txtTiempo);
             this.Controls.Add(this.gb_reserva);
@@ -248,6 +295,8 @@ namespace proyectoFinal
             this.gb_reserva.PerformLayout();
             this.gb_vehiculo.ResumeLayout(false);
             this.gb_vehiculo.PerformLayout();
+            this.gb_horario.ResumeLayout(false);
+            this.gb_horario.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,5 +321,9 @@ namespace proyectoFinal
         private RadioButton rb_reservar;
         private TextBox txtTiempo;
         private GroupBox gb_vehiculo;
+        private Label label2;
+        private GroupBox gb_horario;
+        private RadioButton rb_hora;
+        private RadioButton rb_dia;
     }
 }

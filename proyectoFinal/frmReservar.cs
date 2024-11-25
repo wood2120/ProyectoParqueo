@@ -38,21 +38,41 @@ namespace proyectoFinal
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
            
-        } 
+        }
         private void Guardar_espacio()
         {
             try
             {
-               
+                // Configurar el estado del txtTiempo según el radio button seleccionado
+                if (rb_hora.Checked)
+                {
+                    txtTiempo.Enabled = true; // Permitir escribir en txtTiempo
+                }
+                else if (rb_dia.Checked)
+                {
+                    txtTiempo.Enabled = false; // No permitir escribir en txtTiempo
+                    txtTiempo.Text = "24"; // Asignar el valor "24" directamente
+                }
+
                 sqlConnection1.Open();
 
-                SqlCommand comandoEspacio = new SqlCommand("SP_GUARDAR_ESPACIO_PARQUEO", sqlConnection1);
-                comandoEspacio.CommandType = CommandType.StoredProcedure;
+                // Determinar el valor de tiempo y tipo_tiempo
+                string tiempo = rb_dia.Checked ? "24" : txtTiempo.Text;
+                string tipoTiempo = rb_dia.Checked ? "Día completo" : "Por hora"; // Ajusta según cómo lo manejes en la base de datos
 
+                // Crear y configurar el comando para SP_GUARDAR_ESPACIO_RESERVA
+                SqlCommand comandoEspacio = new SqlCommand("SP_GUARDAR_ESPACIO_RESERVA", sqlConnection1)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                // Parámetros para el procedimiento almacenado
                 comandoEspacio.Parameters.AddWithValue("@placa", string.IsNullOrEmpty(txtPlaca.Text) ? (object)DBNull.Value : txtPlaca.Text);
-                comandoEspacio.Parameters.AddWithValue("@tiempo", string.IsNullOrEmpty(txtTiempo.Text) ? (object)DBNull.Value : txtTiempo.Text);
+                comandoEspacio.Parameters.AddWithValue("@tiempo", string.IsNullOrEmpty(tiempo) ? (object)DBNull.Value : tiempo);
+                comandoEspacio.Parameters.AddWithValue("@tipo_tiempo", string.IsNullOrEmpty(tipoTiempo) ? (object)DBNull.Value : tipoTiempo);
                 comandoEspacio.Parameters.AddWithValue("@espacio", string.IsNullOrEmpty(espacios_seleccionar.Text) ? (object)DBNull.Value : espacios_seleccionar.Text);
 
+                // Determinar el tipo de vehículo
                 string tipoSeleccionado = null;
                 if (rbCarro.Checked)
                     tipoSeleccionado = rbCarro.Text;
@@ -65,6 +85,7 @@ namespace proyectoFinal
 
                 comandoEspacio.Parameters.AddWithValue("@tipo", tipoSeleccionado ?? (object)DBNull.Value);
 
+                // Determinar el tipo de reserva
                 string tipoReservaSeleccionado = null;
                 if (rb_reservar.Checked)
                     tipoReservaSeleccionado = rb_reservar.Text;
@@ -73,6 +94,7 @@ namespace proyectoFinal
 
                 comandoEspacio.Parameters.AddWithValue("@tipo_reserva", tipoReservaSeleccionado ?? (object)DBNull.Value);
 
+                // Ejecutar el procedimiento almacenado
                 SqlDataReader espacios = comandoEspacio.ExecuteReader();
 
                 if (espacios.Read())
@@ -89,12 +111,13 @@ namespace proyectoFinal
             }
             finally
             {
-                
                 if (sqlConnection1.State == ConnectionState.Open)
                     sqlConnection1.Close();
             }
-
         }
+
+
+
         private void cancelar()
         {
             
@@ -164,6 +187,7 @@ namespace proyectoFinal
                     sqlConnection1.Close();
                 }
             }
+            ActualizarLimitePlaca();
         }
 
         private void rbDiscapacitado_CheckedChanged(object sender, EventArgs e)
@@ -212,6 +236,7 @@ namespace proyectoFinal
                     sqlConnection1.Close();
                 }
             }
+            ActualizarLimitePlaca();
         }
 
         private void rbCamion_CheckedChanged(object sender, EventArgs e)
@@ -259,52 +284,56 @@ namespace proyectoFinal
                     sqlConnection1.Close();
                 }
             }
+            ActualizarLimitePlaca();
         }
 
         private void rbMoto_CheckedChanged(object sender, EventArgs e)
         {
             try
-            {
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
+             {
+                 if (sqlConnection1.State != ConnectionState.Open)
+                 {
+                     sqlConnection1.Open();
+                 }
 
-                SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_MOTO", sqlConnection1);
-                comandoEspacio.CommandType = CommandType.StoredProcedure;
+                 SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_MOTO", sqlConnection1);
+                 comandoEspacio.CommandType = CommandType.StoredProcedure;
 
-                SqlDataReader espacioReader = comandoEspacio.ExecuteReader();
+                 SqlDataReader espacioReader = comandoEspacio.ExecuteReader();
 
-                espacios_seleccionar.Items.Clear();
+                 espacios_seleccionar.Items.Clear();
 
-                while (espacioReader.Read())
-                {
-                    if (espacioReader["espacio"] != DBNull.Value)
-                    {
-                        espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
-                    }
-                }
+                 while (espacioReader.Read())
+                 {
+                     if (espacioReader["espacio"] != DBNull.Value)
+                     {
+                         espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
+                     }
+                 }
 
-                espacioReader.Close();
+                 espacioReader.Close();
 
-                if (espacios_seleccionar.Items.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron espacios disponibles.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
+                 if (espacios_seleccionar.Items.Count == 0)
+                 {
+                     MessageBox.Show("No se encontraron espacios disponibles.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                 }
+             }
+             catch (Exception ex)
+             {
 
-                MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
+                 MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+             }
+             finally
+             {
 
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
+                 if (sqlConnection1.State == ConnectionState.Open)
+                 {
+                     sqlConnection1.Close();
+                 }
+             }
+            ActualizarLimitePlaca();
+
+
         }
 
         private void btnReservar_Click(object sender, EventArgs e)
@@ -318,8 +347,29 @@ namespace proyectoFinal
         {
 
         }
+        private void ActualizarLimitePlaca()
+        {
+            if (rbCarro.Checked)
+            {
+                txtPlaca.MaxLength = 7; // Limite de 7 caracteres para carros
+            }
+            else if (rbMoto.Checked)
+            {
+                txtPlaca.MaxLength = 6; // Limite de 6 caracteres para motos
+            }
+            else if (rbCamion.Checked)
+            {
+                txtPlaca.MaxLength = 8; // Limite de 8 caracteres para camiones
+            }
+            else if (rbDiscapacitado.Checked)
+            {
+                txtPlaca.MaxLength = 9; // Limite de 9 caracteres para placas de discapacitados
+            }
+        }
+
+
     }
-    }
+}
     
     
 
