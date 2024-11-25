@@ -36,6 +36,7 @@ namespace proyectoFinal
         private void InitializeComponent()
         {
             this.lstfactura = new System.Windows.Forms.ListView();
+            this.clPlaca = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colIDtipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colespacio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTiempo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -44,7 +45,6 @@ namespace proyectoFinal
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnActualizar = new System.Windows.Forms.Button();
-            this.clPlaca = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lstfactura
@@ -63,6 +63,11 @@ namespace proyectoFinal
             this.lstfactura.UseCompatibleStateImageBehavior = false;
             this.lstfactura.View = System.Windows.Forms.View.Details;
             this.lstfactura.SelectedIndexChanged += new System.EventHandler(this.lstfactura_SelectedIndexChanged);
+            // 
+            // clPlaca
+            // 
+            this.clPlaca.DisplayIndex = 4;
+            this.clPlaca.Text = "Placa";
             // 
             // colIDtipo
             // 
@@ -99,7 +104,7 @@ namespace proyectoFinal
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
             this.lblTitulo.ForeColor = System.Drawing.Color.Teal;
-            this.lblTitulo.Location = new System.Drawing.Point(300, 20);
+            this.lblTitulo.Location = new System.Drawing.Point(254, 21);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(240, 32);
             this.lblTitulo.TabIndex = 1;
@@ -130,11 +135,6 @@ namespace proyectoFinal
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = false;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
-            // clPlaca
-            // 
-            this.clPlaca.DisplayIndex = 4;
-            this.clPlaca.Text = "Placa";
             // 
             // frmfactura
             // 

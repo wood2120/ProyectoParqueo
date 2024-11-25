@@ -146,6 +146,8 @@
             // 
             // picD1
             // 
+            this.picD1.ErrorImage = global::proyectoFinal.Properties.Resources.libre;
+            this.picD1.Image = ((System.Drawing.Image)(resources.GetObject("picD1.Image")));
             this.picD1.Location = new System.Drawing.Point(791, 441);
             this.picD1.Name = "picD1";
             this.picD1.Size = new System.Drawing.Size(57, 52);
