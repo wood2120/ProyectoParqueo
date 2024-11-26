@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace proyectoFinal
@@ -17,22 +13,286 @@ namespace proyectoFinal
         public Form1()
         {
             InitializeComponent();
+
         }
+        // Declarar el Timer
+        private Timer timer;
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            // Configurar el Timer para que actualice las imágenes cada 5 segundos (5000 ms)
+            timer = new Timer();
+            timer.Interval = 5000; // 5000 ms = 5 segundos
+            timer.Tick += Timer_Tick; // Evento que se ejecuta cada vez que el Timer "tiquea"
+            timer.Start(); // Iniciar el Timer
+
+            // Llamar a MostrarImagenParaEspacio para cargar las imágenes al cargar el formulario
+            MostrarImagenParaEspacio("r1", picR1);
+            MostrarImagenParaEspacio("r2", picR2);
+            MostrarImagenParaEspacio("r3", picR3);
+            MostrarImagenParaEspacio("r4", picR4);
+            MostrarImagenParaEspacio("r5", picR5);
+            MostrarImagenParaEspacio("c1", picC1);
+            MostrarImagenParaEspacio("d1", picD1);
+            MostrarImagenParaEspacio("d2", picD2);
+            MostrarImagenParaEspacio("m1", picM1);
+            MostrarImagenParaEspacio("m2", picM2);
+            MostrarImagenParaEspacio("m3", picM3);
+            MostrarImagenParaEspacio("m4", picM4);
+            MostrarImagenParaEspacio("m5", picM5);
+            MostrarImagenParaEspacio("m6", picM6);
+            MostrarImagenParaEspacio("m7", picM7);
+            MostrarImagenParaEspacio("m8", picM8);
         }
 
-       
-
-
-
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void DetenerActualizacion()
         {
-
+            timer.Stop(); // Detener el Timer
         }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Actualizar las imágenes de los espacios cada vez que el Timer "tiquea"
+            MostrarImagenParaEspacio("r1", picR1);
+            MostrarImagenParaEspacio("r2", picR2);
+            MostrarImagenParaEspacio("r3", picR3);
+            MostrarImagenParaEspacio("r4", picR4);
+            MostrarImagenParaEspacio("r5", picR5);
+            MostrarImagenParaEspacio("c1", picC1);
+            MostrarImagenParaEspacio("d1", picD1);
+            MostrarImagenParaEspacio("d2", picD2);
+            MostrarImagenParaEspacio("m1", picM1);
+            MostrarImagenParaEspacio("m2", picM2);
+            MostrarImagenParaEspacio("m3", picM3);
+            MostrarImagenParaEspacio("m4", picM4);
+            MostrarImagenParaEspacio("m5", picM5);
+            MostrarImagenParaEspacio("m6", picM6);
+            MostrarImagenParaEspacio("m7", picM7);
+            MostrarImagenParaEspacio("m8", picM8);
+        }
+
+        private void MostrarImagenParaEspacio(string espacio, PictureBox picBox)
+        {
+            try
+            {
+                // Asegúrate de que la conexión a la base de datos esté abierta
+                sqlConnection1.Open();
+
+                // Crear y configurar el comando para obtener la imagen del espacio
+                SqlCommand comandoEspacio = new SqlCommand("SP_OBTENER_IMAGEN_ESPACIO", sqlConnection1)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                comandoEspacio.Parameters.AddWithValue("@espacio", espacio); // Pasar el nombre del espacio como parámetro
+
+                // Ejecutar el comando y obtener la imagen
+                SqlDataReader reader = comandoEspacio.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // Obtener los bytes de la imagen desde la base de datos
+                    byte[] imagenBytes = reader["imagen"] as byte[];
+
+                    if (imagenBytes != null)
+                    {
+                        // Convertir los bytes de la imagen a una imagen y mostrarla en el PictureBox
+                        using (MemoryStream ms = new MemoryStream(imagenBytes))
+                        {
+                            picBox.Image = Image.FromStream(ms);
+
+                            // Ajustar la imagen al tamaño del PictureBox
+                            picBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                        }
+                    }
+                    else
+                    {
+                        // Si no hay imagen, asignar la imagen "libre.png" predeterminada
+                        string rutaImagen = @"C:\Users\crist\Downloads\img\libre.png";
+                        picBox.Image = Image.FromFile(rutaImagen);
+                        picBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                    }
+                }
+                else
+                {
+                    // Si no se encuentra el espacio, asignar la imagen "libre.png"
+                    string rutaImagen = @"C:\Users\crist\Downloads\img\libre.png";
+                    picBox.Image = Image.FromFile(rutaImagen);
+                    picBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (sqlConnection1.State == ConnectionState.Open)
+                    sqlConnection1.Close();
+            }
+        }
+
+
+        /*private void MostrarImagenParac1()
+        {
+            try
+            {
+                // Asegúrate de que la conexión a la base de datos esté abierta
+                sqlConnection1.Open();
+
+                // Crear y configurar el comando para obtener la imagen del espacio "r1"
+                SqlCommand comandoEspacio = new SqlCommand("SP_OBTENER_IMAGEN_ESPACIO", sqlConnection1)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                comandoEspacio.Parameters.AddWithValue("@espacio", "c1"); // Buscar el espacio "r1"
+
+                // Ejecutar el comando y obtener la imagen
+                SqlDataReader reader = comandoEspacio.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // Obtener los bytes de la imagen desde la base de datos
+                    byte[] imagenBytes = reader["imagen"] as byte[];
+
+                    if (imagenBytes != null)
+                    {
+                        // Convertir los bytes de la imagen a una imagen y mostrarla en el PictureBox
+                        using (MemoryStream ms = new MemoryStream(imagenBytes))
+                        {
+                            picC1.Image = Image.FromStream(ms);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró una imagen para el espacio 'c1'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró el espacio 'c1'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (sqlConnection1.State == ConnectionState.Open)
+                    sqlConnection1.Close();
+            }
+        }
+        private void MostrarImagenParar1()
+        {
+            try
+            {
+                // Asegúrate de que la conexión a la base de datos esté abierta
+                sqlConnection1.Open();
+
+                // Crear y configurar el comando para obtener la imagen del espacio "r1"
+                SqlCommand comandoEspacio = new SqlCommand("SP_OBTENER_IMAGEN_ESPACIO", sqlConnection1)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                comandoEspacio.Parameters.AddWithValue("@espacio", "r1"); // Buscar el espacio "r1"
+
+                // Ejecutar el comando y obtener la imagen
+                SqlDataReader reader = comandoEspacio.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // Obtener los bytes de la imagen desde la base de datos
+                    byte[] imagenBytes = reader["imagen"] as byte[];
+
+                    if (imagenBytes != null)
+                    {
+                        // Convertir los bytes de la imagen a una imagen y mostrarla en el PictureBox
+                        using (MemoryStream ms = new MemoryStream(imagenBytes))
+                        {
+                            picR1.Image = Image.FromStream(ms);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró una imagen para el espacio 'r1'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró el espacio 'r1'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (sqlConnection1.State == ConnectionState.Open)
+                    sqlConnection1.Close();
+            }
+        }
+        private void MostrarImagenParar2()
+        {
+            try
+            {
+                // Asegúrate de que la conexión a la base de datos esté abierta
+                sqlConnection1.Open();
+
+                // Crear y configurar el comando para obtener la imagen del espacio "r1"
+                SqlCommand comandoEspacio = new SqlCommand("SP_OBTENER_IMAGEN_ESPACIO", sqlConnection1)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                comandoEspacio.Parameters.AddWithValue("@espacio", "r2"); // Buscar el espacio "r1"
+
+                // Ejecutar el comando y obtener la imagen
+                SqlDataReader reader = comandoEspacio.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // Obtener los bytes de la imagen desde la base de datos
+                    byte[] imagenBytes = reader["imagen"] as byte[];
+
+                    if (imagenBytes != null)
+                    {
+                        // Convertir los bytes de la imagen a una imagen y mostrarla en el PictureBox
+                        using (MemoryStream ms = new MemoryStream(imagenBytes))
+                        {
+                            picR2.Image = Image.FromStream(ms);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró una imagen para el espacio 'r2'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró el espacio 'r2'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (sqlConnection1.State == ConnectionState.Open)
+                    sqlConnection1.Close();
+            }
+        }*/
+
+
+
 
         private void btnReservar_Click(object sender, EventArgs e)
         {
@@ -44,7 +304,6 @@ namespace proyectoFinal
         {
             frmcobrar frmcobrar = new frmcobrar();
             frmcobrar.ShowDialog();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,1190 +312,27 @@ namespace proyectoFinal
             frmfactura.ShowDialog();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void picR1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "R1"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picR1.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-
-        }
-
+        private void pictureBox1_Click(object sender, EventArgs e) { }
         private void picR2_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
 
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "R2"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picR2.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
         }
-
-        private void picR3_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "R3"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picR3.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void picR4_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "R4"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picR4.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void picR5_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "R5"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picR5.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void picC1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "c1"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picR1.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void picD2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "D2"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picR1.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void picD1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "D1"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picR1.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void picM4_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "M4"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picR1.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void picM3_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "M3"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picR1.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void picM2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Definir el espacio que corresponde al PictureBox (en este caso, M2)
-                string espacio = "M2"; // Cambia esto si estás usando otro espacio dinámicamente
-
-                // Paso 2: Llamar al procedimiento almacenado para obtener la imagen
-                SqlCommand comandoImagenes = new SqlCommand("ObtenerImagenPorEspacio", sqlConnection1);
-                comandoImagenes.CommandType = CommandType.StoredProcedure;
-                comandoImagenes.Parameters.AddWithValue("@Espacio", espacio);
-
-                // Paso 3: Ejecutar la consulta y leer los resultados
-                using (SqlDataReader reader = comandoImagenes.ExecuteReader())
-                {
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-
-                        // Ahora intenta cargar la imagen desde el stream
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picM2.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontró una imagen asociada con el espacio o tipo de reserva especificado.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejo de excepciones con más detalles
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}\nPila: {ex.StackTrace}",
-                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void pic_Click(object sender, EventArgs e)
-        {
-            PictureBox clickedPic = sender as PictureBox;
-            string espacio = clickedPic.Name; // Usa el nombre del PictureBox para determinar el espacio
-
-            // Llamar al procedimiento almacenado como en el código anterior
-        }
-
-
-
-
-        private void picM6_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "M6"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picM6.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void picM5_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "M5"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picM5.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void picM7_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "M7"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picM7.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            };
-        }
-
-        private void picM1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "M1"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picM1.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-        private void picM8_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Asegúrate de que la conexión esté abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Paso 1: Obtener el tipo_reserva desde la tabla parqueo_control usando el campo 'espacio'
-                string queryParqueoControl = "SELECT tipo_reserva FROM parqueo_control WHERE espacio = @espacio"; // Consulta para obtener tipo_reserva basado en espacio
-                SqlCommand comandoParqueoControl = new SqlCommand(queryParqueoControl, sqlConnection1);
-                comandoParqueoControl.Parameters.AddWithValue("@espacio", "M8"); // Cambia "A1" por el valor de espacio que necesites
-
-                object resultadoTipoReserva = comandoParqueoControl.ExecuteScalar(); // Devuelve el tipo_reserva o null
-
-                // Verificar si se obtiene el valor esperado de tipo_reserva
-                if (resultadoTipoReserva != null)
-                {
-                    string tipoReserva = resultadoTipoReserva.ToString().Trim(); // Usamos Trim() para quitar posibles espacios extra
-
-                    // Depuración: Verificar el valor obtenido
-                    MessageBox.Show($"Valor de tipo_reserva obtenido: {tipoReserva}", "Depuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Paso 2: Buscar la imagen en la tabla imagenes basada en el tipo_reserva obtenido
-                    string queryImagenes = "SELECT imagen FROM imagenes WHERE tipo = @tipo"; // Consulta para obtener la imagen basada en tipo
-                    SqlCommand comandoImagenes = new SqlCommand(queryImagenes, sqlConnection1);
-                    comandoImagenes.Parameters.AddWithValue("@tipo", tipoReserva); // Usamos el tipo_reserva como parámetro
-
-                    // Ejecutamos la consulta
-                    SqlDataReader reader = comandoImagenes.ExecuteReader();
-
-                    // Paso 3: Procesar los datos obtenidos y asignarlos al PictureBox
-                    if (reader.Read() && reader["imagen"] != DBNull.Value)
-                    {
-                        // Convertir los datos binarios en una imagen
-                        byte[] imageData = (byte[])reader["imagen"];
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            picM8.Image = Image.FromStream(ms); // Asignar la imagen al PictureBox
-                        }
-                    }
-                    else
-                    {
-                        // Si no se encuentra la imagen asociada, mostrar un mensaje
-                        MessageBox.Show($"No se encontró una imagen asociada con el tipo: {tipoReserva}.",
-                                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    reader.Close(); // Cerrar el SqlDataReader después de su uso
-                }
-                else
-                {
-                    // Si no se encuentra un valor para tipo_reserva
-                    MessageBox.Show("No se encontró ningún valor de tipo_reserva en la tabla parqueo_control para el espacio especificado.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                // En caso de error, mostrar el mensaje de excepción
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurarse de cerrar la conexión
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-      
-
-
-        
+        private void picR3_Click(object sender, EventArgs e) { }
+        private void picR4_Click(object sender, EventArgs e) { }
+        private void picR5_Click(object sender, EventArgs e) { }
+        private void picC1_Click(object sender, EventArgs e) { }
+        private void picD2_Click(object sender, EventArgs e) { }
+        private void picD1_Click(object sender, EventArgs e) { }
+        private void picM4_Click(object sender, EventArgs e) { }
+        private void picM3_Click(object sender, EventArgs e) { }
+        private void picM2_Click(object sender, EventArgs e) { }
+        private void picM1_Click(object sender, EventArgs e) { }
+        private void picM5_Click(object sender, EventArgs e) { }
+        private void picM6_Click(object sender, EventArgs e) { }
+        private void picM7_Click(object sender, EventArgs e) { }
+        private void picM8_Click(object sender, EventArgs e) { }
+        private void button1_Click_1(object sender, EventArgs e) { }
+        private void picR1_Click_1(object sender, EventArgs e) { }
+        private void txtIndice_TextChanged(object sender, EventArgs e) { }
     }
 }

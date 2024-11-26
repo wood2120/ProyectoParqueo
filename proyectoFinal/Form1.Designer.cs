@@ -34,7 +34,6 @@
             this.picR2 = new System.Windows.Forms.PictureBox();
             this.picR5 = new System.Windows.Forms.PictureBox();
             this.picR4 = new System.Windows.Forms.PictureBox();
-            this.picR1 = new System.Windows.Forms.PictureBox();
             this.picC1 = new System.Windows.Forms.PictureBox();
             this.picD2 = new System.Windows.Forms.PictureBox();
             this.picD1 = new System.Windows.Forms.PictureBox();
@@ -51,12 +50,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnfactura = new System.Windows.Forms.Button();
             this.sqlConnection1 = new System.Data.SqlClient.SqlConnection();
+            this.picR1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picR1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picC1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picD2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picD1)).BeginInit();
@@ -68,6 +67,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picM2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picM1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picM8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picR1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -83,7 +83,7 @@
             // 
             // picR3
             // 
-            this.picR3.Location = new System.Drawing.Point(95, 99);
+            this.picR3.Location = new System.Drawing.Point(110, 99);
             this.picR3.Name = "picR3";
             this.picR3.Size = new System.Drawing.Size(57, 52);
             this.picR3.TabIndex = 1;
@@ -116,15 +116,6 @@
             this.picR4.TabIndex = 4;
             this.picR4.TabStop = false;
             this.picR4.Click += new System.EventHandler(this.picR4_Click);
-            // 
-            // picR1
-            // 
-            this.picR1.Location = new System.Drawing.Point(259, 479);
-            this.picR1.Name = "picR1";
-            this.picR1.Size = new System.Drawing.Size(57, 52);
-            this.picR1.TabIndex = 5;
-            this.picR1.TabStop = false;
-            this.picR1.Click += new System.EventHandler(this.picR1_Click);
             // 
             // picC1
             // 
@@ -233,7 +224,7 @@
             this.btnPago.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnPago.FlatAppearance.BorderSize = 0;
             this.btnPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPago.Location = new System.Drawing.Point(958, 44);
+            this.btnPago.Location = new System.Drawing.Point(958, 54);
             this.btnPago.Name = "btnPago";
             this.btnPago.Size = new System.Drawing.Size(91, 82);
             this.btnPago.TabIndex = 17;
@@ -283,12 +274,22 @@
     "rity=True;Encrypt=False";
             this.sqlConnection1.FireInfoMessageEventOnUserErrors = false;
             // 
+            // picR1
+            // 
+            this.picR1.Location = new System.Drawing.Point(259, 481);
+            this.picR1.Name = "picR1";
+            this.picR1.Size = new System.Drawing.Size(100, 50);
+            this.picR1.TabIndex = 23;
+            this.picR1.TabStop = false;
+           // this.picR1.Click += new System.EventHandler(this.picR1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1180, 637);
+            this.Controls.Add(this.picR1);
             this.Controls.Add(this.btnfactura);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnReservar);
@@ -304,7 +305,6 @@
             this.Controls.Add(this.picD1);
             this.Controls.Add(this.picD2);
             this.Controls.Add(this.picC1);
-            this.Controls.Add(this.picR1);
             this.Controls.Add(this.picR4);
             this.Controls.Add(this.picR5);
             this.Controls.Add(this.picR2);
@@ -319,7 +319,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picR2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picR1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picC1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picD2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picD1)).EndInit();
@@ -331,6 +330,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picM2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picM1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picM8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picR1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,7 +343,6 @@
         private System.Windows.Forms.PictureBox picR2;
         private System.Windows.Forms.PictureBox picR5;
         private System.Windows.Forms.PictureBox picR4;
-        private System.Windows.Forms.PictureBox picR1;
         private System.Windows.Forms.PictureBox picC1;
         private System.Windows.Forms.PictureBox picD2;
         private System.Windows.Forms.PictureBox picD1;
@@ -360,6 +359,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnfactura;
         public System.Data.SqlClient.SqlConnection sqlConnection1;
+        private System.Windows.Forms.PictureBox picR1;
     }
 }
 
