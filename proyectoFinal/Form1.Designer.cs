@@ -281,7 +281,7 @@
             this.picR1.Size = new System.Drawing.Size(100, 50);
             this.picR1.TabIndex = 23;
             this.picR1.TabStop = false;
-           // this.picR1.Click += new System.EventHandler(this.picR1_Click_1);
+            this.picR1.Click += new System.EventHandler(this.picR1_Click_1);
             // 
             // Form1
             // 

@@ -17,18 +17,18 @@ namespace proyectoFinal
         public frmReservar()
         {
             InitializeComponent();
-          
+
         }
 
-       
-        
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
             cancelar();
 
         }
-       
+
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -37,7 +37,7 @@ namespace proyectoFinal
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
         }
         private void Guardar_espacio()
         {
@@ -104,6 +104,66 @@ namespace proyectoFinal
                 }
 
                 espacios.Close();
+
+                // Deshabilitar el ComboBox después de guardar la reserva
+                espacios_seleccionar.Enabled = false; // Deshabilita la selección de espacio una vez guardado
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (sqlConnection1.State == ConnectionState.Open)
+                    sqlConnection1.Close();
+            }
+        }
+
+        private void Guardar_reserva()
+        {
+            try
+            {
+                sqlConnection1.Open();
+
+                // Crear y configurar el comando para SP_GUARDAR_ESPACIO
+                SqlCommand comandoEspacio = new SqlCommand("SP_GUARDAR_ESPACIO", sqlConnection1)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                comandoEspacio.Parameters.AddWithValue("@espacio",
+                    string.IsNullOrEmpty(espacios_seleccionar.Text) ? (object)DBNull.Value : espacios_seleccionar.Text);
+
+                // Determinar el tipo de reserva y asignar la imagen correspondiente
+                string tipoReservaSeleccionado = null;
+                byte[] imagenBytes = null;
+
+                if (rb_reservar.Checked)
+                {
+                    tipoReservaSeleccionado = rb_reservar.Text;
+                    imagenBytes = ObtenerBytesImagen(@"C:\Users\crist\Downloads\img\descarga.jpg"); // Imagen para "Reservar"
+                }
+                else if (rb_usar.Checked)
+                {
+                    tipoReservaSeleccionado = rb_usar.Text;
+                    imagenBytes = ObtenerBytesImagen(@"C:\Users\crist\Downloads\img\ocupado.png"); // Imagen para "Ocupar"
+                }
+
+                comandoEspacio.Parameters.AddWithValue("@tipo_reserva", tipoReservaSeleccionado ?? (object)DBNull.Value);
+                comandoEspacio.Parameters.AddWithValue("@imagen", imagenBytes ?? (object)DBNull.Value);
+
+                // Ejecutar el procedimiento almacenado
+                comandoEspacio.ExecuteNonQuery();
+
+                // Eliminar la opción seleccionada del ComboBox
+                string espacioSeleccionado = espacios_seleccionar.Text;
+
+                // Verificar si el espacio seleccionado está en la lista y eliminarlo
+                if (espacios_seleccionar.Items.Contains(espacioSeleccionado))
+                {
+                    espacios_seleccionar.Items.Remove(espacioSeleccionado); // Eliminar el espacio seleccionado
+                }
+
             }
             catch (Exception ex)
             {
@@ -118,20 +178,42 @@ namespace proyectoFinal
 
 
 
+        /// <summary>
+        /// Convierte una imagen en un arreglo de bytes.
+        /// </summary>
+        /// <param name="rutaImagen">Ruta de la imagen a convertir.</param>
+        /// <returns>Arreglo de bytes que representa la imagen.</returns>
+        private byte[] ObtenerBytesImagen(string rutaImagen)
+        {
+            if (System.IO.File.Exists(rutaImagen))
+            {
+                return System.IO.File.ReadAllBytes(rutaImagen);
+            }
+            else
+            {
+                MessageBox.Show("La imagen no existe en la ruta especificada: " + rutaImagen, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+
+
+
+
         private void cancelar()
         {
-            
-                txtPlaca.Clear();
-                espacios_seleccionar.Select();
-                //gb_vehiculo.Checked = false;
-                //gb_reserva.Enabled = false;
-                txtPlaca.Focus();
-            
+
+            txtPlaca.Clear();
+            espacios_seleccionar.Select();
+            //gb_vehiculo.Checked = false;
+            //gb_reserva.Enabled = false;
+            txtPlaca.Focus();
+
         }
-       
+
         private void button1_Click_1(object sender, EventArgs e)
         {
-            
+
         }
 
         private void frmReservar_Load(object sender, EventArgs e)
@@ -143,7 +225,7 @@ namespace proyectoFinal
         {
             try
             {
-                
+
                 if (sqlConnection1.State != ConnectionState.Open)
                 {
                     sqlConnection1.Open();
@@ -158,7 +240,7 @@ namespace proyectoFinal
 
                 while (espacioReader.Read())
                 {
-                    
+
                     if (espacioReader["espacio"] != DBNull.Value)
                     {
                         espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
@@ -225,12 +307,12 @@ namespace proyectoFinal
             }
             catch (Exception ex)
             {
-               
+
                 MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-              
+
                 if (sqlConnection1.State == ConnectionState.Open)
                 {
                     sqlConnection1.Close();
@@ -243,7 +325,7 @@ namespace proyectoFinal
         {
             try
             {
-                
+
                 if (sqlConnection1.State != ConnectionState.Open)
                 {
                     sqlConnection1.Open();
@@ -258,7 +340,7 @@ namespace proyectoFinal
 
                 while (espacioReader.Read())
                 {
-                    
+
                     if (espacioReader["espacio"] != DBNull.Value)
                     {
                         espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
@@ -274,7 +356,7 @@ namespace proyectoFinal
             }
             catch (Exception ex)
             {
-                
+
                 MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -290,47 +372,47 @@ namespace proyectoFinal
         private void rbMoto_CheckedChanged(object sender, EventArgs e)
         {
             try
-             {
-                 if (sqlConnection1.State != ConnectionState.Open)
-                 {
-                     sqlConnection1.Open();
-                 }
+            {
+                if (sqlConnection1.State != ConnectionState.Open)
+                {
+                    sqlConnection1.Open();
+                }
 
-                 SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_MOTO", sqlConnection1);
-                 comandoEspacio.CommandType = CommandType.StoredProcedure;
+                SqlCommand comandoEspacio = new SqlCommand("SP_CONSULTAR_ESPACIO_MOTO", sqlConnection1);
+                comandoEspacio.CommandType = CommandType.StoredProcedure;
 
-                 SqlDataReader espacioReader = comandoEspacio.ExecuteReader();
+                SqlDataReader espacioReader = comandoEspacio.ExecuteReader();
 
-                 espacios_seleccionar.Items.Clear();
+                espacios_seleccionar.Items.Clear();
 
-                 while (espacioReader.Read())
-                 {
-                     if (espacioReader["espacio"] != DBNull.Value)
-                     {
-                         espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
-                     }
-                 }
+                while (espacioReader.Read())
+                {
+                    if (espacioReader["espacio"] != DBNull.Value)
+                    {
+                        espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
+                    }
+                }
 
-                 espacioReader.Close();
+                espacioReader.Close();
 
-                 if (espacios_seleccionar.Items.Count == 0)
-                 {
-                     MessageBox.Show("No se encontraron espacios disponibles.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                 }
-             }
-             catch (Exception ex)
-             {
+                if (espacios_seleccionar.Items.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron espacios disponibles.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
 
-                 MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             }
-             finally
-             {
+                MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
 
-                 if (sqlConnection1.State == ConnectionState.Open)
-                 {
-                     sqlConnection1.Close();
-                 }
-             }
+                if (sqlConnection1.State == ConnectionState.Open)
+                {
+                    sqlConnection1.Close();
+                }
+            }
             ActualizarLimitePlaca();
 
 
@@ -339,8 +421,10 @@ namespace proyectoFinal
         private void btnReservar_Click(object sender, EventArgs e)
         {
             Guardar_espacio();
+            Guardar_reserva();
             MessageBox.Show("Datos guardados");
             this.Close();
+
         }
 
         private void frmReservar_Load_1(object sender, EventArgs e)
@@ -370,6 +454,6 @@ namespace proyectoFinal
 
     }
 }
-    
-    
+
+
 

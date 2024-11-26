@@ -5,9 +5,10 @@ namespace proyectoFinal
 {
     public partial class frmReservar : Form
     {
-      
+
 
         private void InitializeComponent()
+
         {
             this.lblTitulo = new System.Windows.Forms.Label();
             this.lblPlaca = new System.Windows.Forms.Label();
@@ -32,6 +33,7 @@ namespace proyectoFinal
             this.gb_horario = new System.Windows.Forms.GroupBox();
             this.rb_hora = new System.Windows.Forms.RadioButton();
             this.rb_dia = new System.Windows.Forms.RadioButton();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.gb_reserva.SuspendLayout();
             this.gb_vehiculo.SuspendLayout();
             this.gb_horario.SuspendLayout();
@@ -325,5 +327,6 @@ namespace proyectoFinal
         private GroupBox gb_horario;
         private RadioButton rb_hora;
         private RadioButton rb_dia;
+        private ColorDialog colorDialog1;
     }
 }

@@ -6,10 +6,7 @@ namespace proyectoFinal
 {
     public partial class frmcobrar : Form
     {
-        public frmcobrar()
-        {
-            InitializeComponent();
-        }
+      
 
         private System.ComponentModel.IContainer components = null;
 
@@ -39,6 +36,12 @@ namespace proyectoFinal
             this.lblEspacioSeleccionado = new System.Windows.Forms.Label();
             this.btnCobrar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.lbEspacio = new System.Windows.Forms.Label();
+            this.lbMonto = new System.Windows.Forms.Label();
+            this.cbEspacio = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.txttiempo = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // sqlConnection1
@@ -62,35 +65,32 @@ namespace proyectoFinal
             // 
             this.lblMonto.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.lblMonto.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblMonto.Location = new System.Drawing.Point(159, 82);
+            this.lblMonto.Location = new System.Drawing.Point(167, 145);
             this.lblMonto.Name = "lblMonto";
             this.lblMonto.Size = new System.Drawing.Size(197, 30);
             this.lblMonto.TabIndex = 1;
             this.lblMonto.Text = "Monto a Cobrar: $";
             this.lblMonto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblMonto.Click += new System.EventHandler(this.lblMonto_Click);
             // 
             // lblDato
             // 
             this.lblDato.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblDato.Location = new System.Drawing.Point(250, 130);
+            this.lblDato.Location = new System.Drawing.Point(199, 91);
             this.lblDato.Name = "lblDato";
-            this.lblDato.Size = new System.Drawing.Size(300, 30);
+            this.lblDato.Size = new System.Drawing.Size(208, 30);
             this.lblDato.TabIndex = 2;
-            this.lblDato.Text = "Dato adicional: Sin datos";
+            this.lblDato.Text = "Tiempo";
             this.lblDato.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblDato.Click += new System.EventHandler(this.lblDato_Click);
             // 
             // lblEspacioSeleccionado
             // 
             this.lblEspacioSeleccionado.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblEspacioSeleccionado.Location = new System.Drawing.Point(250, 170);
+            this.lblEspacioSeleccionado.Location = new System.Drawing.Point(171, 52);
             this.lblEspacioSeleccionado.Name = "lblEspacioSeleccionado";
-            this.lblEspacioSeleccionado.Size = new System.Drawing.Size(300, 30);
+            this.lblEspacioSeleccionado.Size = new System.Drawing.Size(224, 30);
             this.lblEspacioSeleccionado.TabIndex = 3;
-            this.lblEspacioSeleccionado.Text = "Espacio seleccionado: Ninguno";
+            this.lblEspacioSeleccionado.Text = "Espacio seleccionado: ";
             this.lblEspacioSeleccionado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblEspacioSeleccionado.Click += new System.EventHandler(this.lblEspacioSeleccionado_Click);
             // 
             // btnCobrar
             // 
@@ -116,13 +116,74 @@ namespace proyectoFinal
             this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
+            // 
+            // lbEspacio
+            // 
+            this.lbEspacio.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lbEspacio.Location = new System.Drawing.Point(371, 52);
+            this.lbEspacio.Name = "lbEspacio";
+            this.lbEspacio.Size = new System.Drawing.Size(208, 30);
+            this.lbEspacio.TabIndex = 7;
+            this.lbEspacio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbMonto
+            // 
+            this.lbMonto.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.lbMonto.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lbMonto.Location = new System.Drawing.Point(382, 145);
+            this.lbMonto.Name = "lbMonto";
+            this.lbMonto.Size = new System.Drawing.Size(197, 30);
+            this.lbMonto.TabIndex = 8;
+            this.lbMonto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbMonto.Visible = false;
+            // 
+            // cbEspacio
+            // 
+            this.cbEspacio.FormattingEnabled = true;
+            this.cbEspacio.Location = new System.Drawing.Point(401, 52);
+            this.cbEspacio.Name = "cbEspacio";
+            this.cbEspacio.Size = new System.Drawing.Size(121, 21);
+            this.cbEspacio.TabIndex = 9;
+            this.cbEspacio.SelectedIndexChanged += new System.EventHandler(this.cbEspacio_SelectedIndexChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(546, 50);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(627, 50);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // txttiempo
+            // 
+            this.txttiempo.Location = new System.Drawing.Point(422, 101);
+            this.txttiempo.Name = "txttiempo";
+            this.txttiempo.Size = new System.Drawing.Size(100, 20);
+            this.txttiempo.TabIndex = 12;
             // 
             // frmcobrar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 300);
+            this.Controls.Add(this.txttiempo);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cbEspacio);
+            this.Controls.Add(this.lbMonto);
+            this.Controls.Add(this.lbEspacio);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnCobrar);
             this.Controls.Add(this.lblEspacioSeleccionado);
@@ -131,7 +192,6 @@ namespace proyectoFinal
             this.Controls.Add(this.lblTitulo);
             this.Name = "frmcobrar";
             this.Text = "Cobrar";
-            this.Load += new System.EventHandler(this.frmcobrar_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,5 +213,11 @@ namespace proyectoFinal
         {
             lblEspacioSeleccionado.Text = $"Espacio seleccionado: {espacio}";
         }
+        public Label lbMonto;
+        public Label lbEspacio;
+        private ComboBox cbEspacio;
+        private Button button1;
+        private Button button2;
+        private TextBox txttiempo;
     }
 }
