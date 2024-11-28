@@ -73,46 +73,38 @@ namespace proyectoFinal
 
             sqlConnection1.Close();
         }
-        private void Guardar_monto()
+        private void GuardarMonto()
         {
             try
             {
-                // Verificar que el campo de texto no esté vacío
-                string monto = txtMonto.Text.Trim();
-               
+                // Asegúrate de abrir la conexión antes de ejecutar el procedimiento
+                sqlConnection1.Open();
 
-                // Abrir la conexión si no está abierta
-                if (sqlConnection1.State != ConnectionState.Open)
+                // Crear el comando para ejecutar el procedimiento almacenado
+                SqlCommand comando = new SqlCommand("SP_GUARDAR_MONTO", sqlConnection1)
                 {
-                    sqlConnection1.Open();
-                }
+                    CommandType = CommandType.StoredProcedure
+                };
 
-                // Crear y configurar el comando para el procedimiento almacenado
-                using (SqlCommand comandoEspacio = new SqlCommand("SP_GUARDAR_MONTO", sqlConnection1))
-                {
-                    comandoEspacio.CommandType = CommandType.StoredProcedure;
+                // Agregar los parámetros para el procedimiento almacenado
+                comando.Parameters.AddWithValue("@placa", txtPlaca.Text); // Aquí pasas el valor de la placa
+                comando.Parameters.AddWithValue("@monto", string.IsNullOrEmpty(txtMonto.Text) ? (object)DBNull.Value : decimal.Parse(txtMonto.Text));
 
-                    // Agregar el parámetro con el valor de txtMonto
-                    comandoEspacio.Parameters.AddWithValue("@monto", monto);
+                // Ejecutar el procedimiento almacenado
+                comando.ExecuteNonQuery();
 
-                    // Ejecutar el procedimiento almacenado
-                    comandoEspacio.ExecuteNonQuery();
-
-                   
-                }
+                MessageBox.Show("Monto actualizado correctamente.");
             }
             catch (Exception ex)
             {
-                // Manejar errores durante la ejecución
-                MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Manejo de errores
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
-                // Cerrar la conexión si está abierta
+                // Cerrar la conexión después de la operación
                 if (sqlConnection1.State == ConnectionState.Open)
-                {
                     sqlConnection1.Close();
-                }
             }
         }
 
