@@ -167,6 +167,17 @@ namespace proyectoFinal
 
                 comandoEspacio.Parameters.AddWithValue("@tipo_reserva", tipoReservaSeleccionado ?? (object)DBNull.Value);
                 comandoEspacio.Parameters.AddWithValue("@imagen", imagenBytes ?? (object)DBNull.Value);
+                string tipoSeleccionado = null;
+                if (rbCarro.Checked)
+                    tipoSeleccionado = rbCarro.Text;
+                else if (rbMoto.Checked)
+                    tipoSeleccionado = rbMoto.Text;
+                else if (rbCamion.Checked)
+                    tipoSeleccionado = rbCamion.Text;
+                else if (rbDiscapacitado.Checked)
+                    tipoSeleccionado = rbDiscapacitado.Text;
+
+                comandoEspacio.Parameters.AddWithValue("@tipo", tipoSeleccionado ?? (object)DBNull.Value);
 
                 // Ejecutar el procedimiento almacenado
                 comandoEspacio.ExecuteNonQuery();
@@ -192,13 +203,6 @@ namespace proyectoFinal
             }
         }
 
-
-
-        /// <summary>
-        /// Convierte una imagen en un arreglo de bytes.
-        /// </summary>
-        /// <param name="rutaImagen">Ruta de la imagen a convertir.</param>
-        /// <returns>Arreglo de bytes que representa la imagen.</returns>
         private byte[] ObtenerBytesImagen(string rutaImagen)
         {
             if (System.IO.File.Exists(rutaImagen))
@@ -211,10 +215,6 @@ namespace proyectoFinal
                 return null;
             }
         }
-
-
-
-
 
         private void cancelar()
         {

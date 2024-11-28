@@ -161,7 +161,7 @@ namespace proyectoFinal
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             //CargarFacturas(); // Vuelve a cargar las facturas
-            MostrarDatosFactura();
+            
         }
 
        /* private void CargarFacturas()

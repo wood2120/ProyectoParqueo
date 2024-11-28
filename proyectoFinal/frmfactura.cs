@@ -28,7 +28,7 @@ namespace proyectoFinal
 
         private void frmfactura_Load(object sender, EventArgs e)
         {
-            
+            MostrarDatosFactura();
         }
         private void MostrarDatosFactura()
         {
