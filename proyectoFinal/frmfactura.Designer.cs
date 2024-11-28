@@ -10,7 +10,7 @@ namespace proyectoFinal
         public frmfactura()
         {
             InitializeComponent();
-            CargarFacturas(); // Llama al método que carga las facturas desde la base de datos
+            //CargarFacturas(); // Llama al método que carga las facturas desde la base de datos
         }
 
         private System.ComponentModel.IContainer components = null;
@@ -147,6 +147,7 @@ namespace proyectoFinal
             this.Controls.Add(this.lstfactura);
             this.Name = "frmfactura";
             this.Text = "Facturas";
+            this.Load += new System.EventHandler(this.frmfactura_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,10 +160,11 @@ namespace proyectoFinal
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            CargarFacturas(); // Vuelve a cargar las facturas
+            //CargarFacturas(); // Vuelve a cargar las facturas
+            MostrarDatosFactura();
         }
 
-        private void CargarFacturas()
+       /* private void CargarFacturas()
         {
             try
             {
@@ -191,16 +193,16 @@ namespace proyectoFinal
             {
                 MessageBox.Show("Error al cargar las facturas: " + ex.Message);
             }
-        }
+        }*/
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        /*private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstfactura.SelectedItems.Count > 0)
             {
                 ListViewItem selectedItem = lstfactura.SelectedItems[0];
                 MessageBox.Show("Factura seleccionada: " + selectedItem.Text);
             }
-        }
+        }*/
 
         private ColumnHeader clPlaca;
     }
