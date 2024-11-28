@@ -202,7 +202,7 @@ namespace proyectoFinal
             this.Name = "frmcobrar";
             this.Text = "Cobrar";
             this.ResumeLayout(false);
-            this.PerformLayout();
+            this.PerformLayout(); 
 
         }
 
