@@ -26,20 +26,100 @@ namespace proyectoFinal
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Pago confirmado correctamente.", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-
-
-        private void lblDato_Click(object sender, EventArgs e)
-        {
-
+            frmrealizar_cobro frmrealizar_cobro = new frmrealizar_cobro();
+            frmrealizar_cobro.ShowDialog();
         }
 
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close(); // Cierra la ventana actual
         }
+
+        private void traer_datos_cobro() {
+
+            sqlConnection1.Open();
+
+            SqlCommand ComandoElemento = new SqlCommand("SP_CONSULTAR_ESPACIOS_MONTO", sqlConnection1);
+            ComandoElemento.CommandType = CommandType.StoredProcedure;
+            ComandoElemento.Parameters.AddWithValue("@consulta", txtPlaca.Text);
+
+            SqlDataReader Elemento = ComandoElemento.ExecuteReader();
+
+            if (Elemento.Read())
+            {
+                txtEspacio.Text = Elemento["espacio"].ToString();
+                txtTiempo.Text = Elemento["tiempo"].ToString();
+            }
+
+            sqlConnection1.Close();
+        }
+
+
+        private void traer_datos_monto()
+        {
+            sqlConnection1.Open();
+
+            SqlCommand ComandoElemento = new SqlCommand("SP_CONSULTAR_MONTO_COBRO", sqlConnection1);
+            ComandoElemento.CommandType = CommandType.StoredProcedure;
+            ComandoElemento.Parameters.AddWithValue("@consulta", txtTiempo.Text);
+
+            SqlDataReader Elemento = ComandoElemento.ExecuteReader();
+
+            if (Elemento.Read())
+            {
+                txtEspacio.Text = Elemento["espacio"].ToString();
+                txtTiempo.Text = Elemento["tiempo"].ToString();
+            }
+
+            sqlConnection1.Close();
+        }
+        private void Guardar_monto()
+        {
+            try
+            {
+                // Verificar que el campo de texto no esté vacío
+                string monto = txtMonto.Text.Trim();
+               
+
+                // Abrir la conexión si no está abierta
+                if (sqlConnection1.State != ConnectionState.Open)
+                {
+                    sqlConnection1.Open();
+                }
+
+                // Crear y configurar el comando para el procedimiento almacenado
+                using (SqlCommand comandoEspacio = new SqlCommand("SP_GUARDAR_MONTO", sqlConnection1))
+                {
+                    comandoEspacio.CommandType = CommandType.StoredProcedure;
+
+                    // Agregar el parámetro con el valor de txtMonto
+                    comandoEspacio.Parameters.AddWithValue("@monto", monto);
+
+                    // Ejecutar el procedimiento almacenado
+                    comandoEspacio.ExecuteNonQuery();
+
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores durante la ejecución
+                MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Cerrar la conexión si está abierta
+                if (sqlConnection1.State == ConnectionState.Open)
+                {
+                    sqlConnection1.Close();
+                }
+            }
+        }
+
+
+
+
+
 
         private void frmcobrar_Load_1(object sender, EventArgs e)
         {
@@ -63,123 +143,28 @@ namespace proyectoFinal
 
         }
 
-        private void cbEspacio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void Consultar_Elemento()
-        {
-            try
-            {
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                SqlCommand ComandoElemento = new SqlCommand("SP_CONSULTAR_ESPACIO_MONTO", sqlConnection1);
-                ComandoElemento.CommandType = CommandType.StoredProcedure;
-
-                // Eliminar la línea que añade el parámetro si no lo necesitas.
-                //ComandoElemento.Parameters.AddWithValue("@espacio", cbEspacio.items);
-
-                SqlDataReader Elemento = ComandoElemento.ExecuteReader();
-
-                cbEspacio.Items.Clear();
-
-                while (Elemento.Read())
-                {
-                    if (Elemento["espacio"] != DBNull.Value)
-                    {
-                        cbEspacio.Items.Add(Elemento["espacio"].ToString());
-                    }
-                }
-
-                Elemento.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-        private void Consultar_Tiempo()
-        {
-            try
-            {
-                // Abrir la conexión si no está abierta
-                if (sqlConnection1.State != ConnectionState.Open)
-                {
-                    sqlConnection1.Open();
-                }
-
-                // Crear el comando para llamar al procedimiento almacenado
-                SqlCommand ComandoElemento = new SqlCommand("SP_CONSULTAR_MONTO_ESPACIO3", sqlConnection1);
-                ComandoElemento.CommandType = CommandType.StoredProcedure;
-
-                // Usar el valor seleccionado en cbEspacio
-                ComandoElemento.Parameters.AddWithValue("@espacio", cbEspacio.Text);
-
-                // Ejecutar la consulta
-                SqlDataReader espacio = ComandoElemento.ExecuteReader();
-
-                // Limpiar el campo txttiempo antes de mostrar un nuevo valor
-                txttiempo.Text = string.Empty;
-
-                // Verificar si hay datos en el DataReader
-                if (espacio.Read())
-                {
-                    // Asignar el valor del campo 'tiempo' a txttiempo
-                    if (espacio["tiempo"] != DBNull.Value)
-                    {
-                        txttiempo.Text = espacio["tiempo"].ToString();
-                    }
-                }
-                else
-                {
-                    // Si no se encuentra un resultado, mostrar un mensaje
-                    txttiempo.Text = "No se encontró información.";
-                }
-
-                // Cerrar el SqlDataReader
-                espacio.Close();
-            }
-            catch (Exception ex)
-            {
-                // Capturar cualquier error y mostrar un mensaje
-                MessageBox.Show($"Error al consultar el tiempo: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Asegurar que la conexión se cierre
-                if (sqlConnection1.State == ConnectionState.Open)
-                {
-                    sqlConnection1.Close();
-                }
-            }
-        }
-
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            Consultar_Elemento();
-        }
-
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            Consultar_Tiempo();
-        }
-
+        private void cbEspacio_SelectedIndexChanged(object sender, EventArgs e) { }
         private void frmcobrar_Load_2(object sender, EventArgs e)
         {
 
         }
+
+        private void lblDato_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPlaca_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            traer_datos_cobro();
+            traer_datos_monto();
+            
+        }
     }
 }
+;

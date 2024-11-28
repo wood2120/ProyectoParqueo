@@ -124,9 +124,22 @@ namespace proyectoFinal
         {
             try
             {
+                // Configurar el estado del txtTiempo según el radio button seleccionado
+                if (rb_hora.Checked)
+                {
+                    txtTiempo.Enabled = true; // Permitir escribir en txtTiempo
+                }
+                else if (rb_dia.Checked)
+                {
+                    txtTiempo.Enabled = false; // No permitir escribir en txtTiempo
+                    txtTiempo.Text = "24"; // Asignar el valor "24" directamente
+                }
+
                 sqlConnection1.Open();
 
-                // Crear y configurar el comando para SP_GUARDAR_ESPACIO
+                // Determinar el valor de tiempo y tipo_tiempo
+                string tiempo = rb_dia.Checked ? "24" : txtTiempo.Text;
+                string tipoTiempo = rb_dia.Checked ? "Día completo" : "Por hora"; // Ajusta según cómo lo manejes en la base de datos
                 SqlCommand comandoEspacio = new SqlCommand("SP_GUARDAR_ESPACIO", sqlConnection1)
                 {
                     CommandType = CommandType.StoredProcedure
@@ -136,6 +149,7 @@ namespace proyectoFinal
 
                 // Determinar el tipo de reserva y asignar la imagen correspondiente
                 string tipoReservaSeleccionado = null;
+             
                 byte[] imagenBytes = null;
 
                 if (rb_reservar.Checked)
@@ -148,6 +162,8 @@ namespace proyectoFinal
                     tipoReservaSeleccionado = rb_usar.Text;
                     imagenBytes = ObtenerBytesImagen(@"C:\Users\crist\Downloads\img\ocupado.png"); // Imagen para "Ocupar"
                 }
+                comandoEspacio.Parameters.AddWithValue("@placa", string.IsNullOrEmpty(txtPlaca.Text) ? (object)DBNull.Value : txtPlaca.Text);
+                comandoEspacio.Parameters.AddWithValue("@tiempo", string.IsNullOrEmpty(tiempo) ? (object)DBNull.Value : tiempo);
 
                 comandoEspacio.Parameters.AddWithValue("@tipo_reserva", tipoReservaSeleccionado ?? (object)DBNull.Value);
                 comandoEspacio.Parameters.AddWithValue("@imagen", imagenBytes ?? (object)DBNull.Value);
