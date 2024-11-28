@@ -18,7 +18,6 @@ namespace proyectoFinal
         private System.Data.SqlClient.SqlConnection sqlConnection1;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnCerrar;
-        private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.ColumnHeader colIDtipo;
         private System.Windows.Forms.ColumnHeader colespacio;
         private System.Windows.Forms.ColumnHeader colTiempo;
@@ -44,19 +43,18 @@ namespace proyectoFinal
             this.sqlConnection1 = new System.Data.SqlClient.SqlConnection();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.btnActualizar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstfactura
             // 
             this.lstfactura.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.clPlaca,
             this.colIDtipo,
+            this.clPlaca,
             this.colespacio,
             this.colTiempo,
             this.colMonto});
             this.lstfactura.HideSelection = false;
-            this.lstfactura.Location = new System.Drawing.Point(46, 70);
+            this.lstfactura.Location = new System.Drawing.Point(63, 56);
             this.lstfactura.Name = "lstfactura";
             this.lstfactura.Size = new System.Drawing.Size(692, 360);
             this.lstfactura.TabIndex = 0;
@@ -66,30 +64,28 @@ namespace proyectoFinal
             // 
             // clPlaca
             // 
-            this.clPlaca.DisplayIndex = 4;
+            this.clPlaca.DisplayIndex = 0;
             this.clPlaca.Text = "Placa";
+            this.clPlaca.Width = 100;
             // 
             // colIDtipo
             // 
-            this.colIDtipo.DisplayIndex = 0;
+            this.colIDtipo.DisplayIndex = 1;
             this.colIDtipo.Text = "TIpo";
             this.colIDtipo.Width = 100;
             // 
             // colespacio
             // 
-            this.colespacio.DisplayIndex = 1;
             this.colespacio.Text = "Espacio";
-            this.colespacio.Width = 150;
+            this.colespacio.Width = 50;
             // 
             // colTiempo
             // 
-            this.colTiempo.DisplayIndex = 2;
             this.colTiempo.Text = "Tiempo";
-            this.colTiempo.Width = 100;
+            this.colTiempo.Width = 50;
             // 
             // colMonto
             // 
-            this.colMonto.DisplayIndex = 3;
             this.colMonto.Text = "Monto";
             this.colMonto.Width = 150;
             // 
@@ -115,7 +111,7 @@ namespace proyectoFinal
             this.btnCerrar.BackColor = System.Drawing.Color.Gray;
             this.btnCerrar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnCerrar.ForeColor = System.Drawing.Color.White;
-            this.btnCerrar.Location = new System.Drawing.Point(430, 440);
+            this.btnCerrar.Location = new System.Drawing.Point(315, 448);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(120, 40);
             this.btnCerrar.TabIndex = 2;
@@ -123,25 +119,11 @@ namespace proyectoFinal
             this.btnCerrar.UseVisualStyleBackColor = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // btnActualizar
-            // 
-            this.btnActualizar.BackColor = System.Drawing.Color.Teal;
-            this.btnActualizar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnActualizar.ForeColor = System.Drawing.Color.White;
-            this.btnActualizar.Location = new System.Drawing.Point(250, 440);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(120, 40);
-            this.btnActualizar.TabIndex = 3;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.UseVisualStyleBackColor = false;
-            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
             // frmfactura
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 500);
-            this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lstfactura);

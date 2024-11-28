@@ -73,16 +73,16 @@ namespace proyectoFinal
         {
             sqlConnection1.Open();
 
-            SqlCommand ComandoElemento = new SqlCommand("SP_CONSULTAR_MONTO_COBRO", sqlConnection1);
+            SqlCommand ComandoElemento = new SqlCommand("calcular_pago", sqlConnection1);
             ComandoElemento.CommandType = CommandType.StoredProcedure;
-            ComandoElemento.Parameters.AddWithValue("@consulta", txtTiempo.Text);
+            ComandoElemento.Parameters.AddWithValue("@placa", txtPlaca.Text);
 
             SqlDataReader Elemento = ComandoElemento.ExecuteReader();
 
             if (Elemento.Read())
             {
-                txtEspacio.Text = Elemento["espacio"].ToString();
-                txtTiempo.Text = Elemento["tiempo"].ToString();
+                txtMonto.Text = Elemento["monto_a_pagar"].ToString();
+            
             }
 
             sqlConnection1.Close();
@@ -107,7 +107,7 @@ namespace proyectoFinal
                 // Ejecutar el procedimiento almacenado
                 comando.ExecuteNonQuery();
 
-                MessageBox.Show("Monto actualizado correctamente.");
+                
             }
             catch (Exception ex)
             {
