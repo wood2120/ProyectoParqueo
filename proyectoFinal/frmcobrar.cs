@@ -53,6 +53,20 @@ namespace proyectoFinal
 
             sqlConnection1.Close();
         }
+        private void borrar_espacio()
+        {
+
+            sqlConnection1.Open();
+
+            SqlCommand ComandoElemento = new SqlCommand("SP_BORRAR_ESPACIO", sqlConnection1);
+            ComandoElemento.CommandType = CommandType.StoredProcedure;
+            ComandoElemento.Parameters.AddWithValue("@placa", txtPlaca.Text);
+
+            SqlDataReader Elemento = ComandoElemento.ExecuteReader();
+
+
+            sqlConnection1.Close();
+        }
 
 
         private void traer_datos_monto()

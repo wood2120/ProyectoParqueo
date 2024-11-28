@@ -211,6 +211,8 @@ namespace proyectoFinal
             // Aquí realizamos una acción al cobrar, por ejemplo, actualizar el monto
             MessageBox.Show("El cobro ha sido realizado exitosamente.", "Cobrar", MessageBoxButtons.OK, MessageBoxIcon.Information);
             GuardarMonto();
+            borrar_espacio();
+            this.Close();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
