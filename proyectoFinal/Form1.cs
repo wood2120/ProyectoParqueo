@@ -15,18 +15,17 @@ namespace proyectoFinal
             InitializeComponent();
 
         }
-        // Declarar el Timer
+        
         private Timer timer;
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Configurar el Timer para que actualice las imágenes cada 5 segundos (5000 ms)
+         
             timer = new Timer();
-            timer.Interval = 5000; // 5000 ms = 5 segundos
-            timer.Tick += Timer_Tick; // Evento que se ejecuta cada vez que el Timer "tiquea"
-            timer.Start(); // Iniciar el Timer
-
-            // Llamar a MostrarImagenParaEspacio para cargar las imágenes al cargar el formulario
+            timer.Interval = 5; 
+            timer.Tick += Timer_Tick; 
+            timer.Start();
+          
             MostrarImagenParaEspacio("r1", picR1);
             MostrarImagenParaEspacio("r2", picR2);
             MostrarImagenParaEspacio("r3", picR3);
@@ -47,12 +46,11 @@ namespace proyectoFinal
 
         private void DetenerActualizacion()
         {
-            timer.Stop(); // Detener el Timer
+            timer.Stop(); 
         }
 
         private void Timer_Tick(object sender, EventArgs e)
-        {
-            // Actualizar las imágenes de los espacios cada vez que el Timer "tiquea"
+        {          
             MostrarImagenParaEspacio("r1", picR1);
             MostrarImagenParaEspacio("r2", picR2);
             MostrarImagenParaEspacio("r3", picR3);
@@ -74,47 +72,38 @@ namespace proyectoFinal
         private void MostrarImagenParaEspacio(string espacio, PictureBox picBox)
         {
             try
-            {
-                // Asegúrate de que la conexión a la base de datos esté abierta
+            {              
                 sqlConnection1.Open();
-
-                // Crear y configurar el comando para obtener la imagen del espacio
+               
                 SqlCommand comandoEspacio = new SqlCommand("SP_OBTENER_IMAGEN_ESPACIO", sqlConnection1)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                comandoEspacio.Parameters.AddWithValue("@espacio", espacio); // Pasar el nombre del espacio como parámetro
 
-                // Ejecutar el comando y obtener la imagen
+                comandoEspacio.Parameters.AddWithValue("@espacio", espacio);                
                 SqlDataReader reader = comandoEspacio.ExecuteReader();
 
                 if (reader.Read())
-                {
-                    // Obtener los bytes de la imagen desde la base de datos
+                {                    
                     byte[] imagenBytes = reader["imagen"] as byte[];
 
                     if (imagenBytes != null)
-                    {
-                        // Convertir los bytes de la imagen a una imagen y mostrarla en el PictureBox
+                    {                     
                         using (MemoryStream ms = new MemoryStream(imagenBytes))
                         {
-                            picBox.Image = Image.FromStream(ms);
-
-                            // Ajustar la imagen al tamaño del PictureBox
+                            picBox.Image = Image.FromStream(ms);                            
                             picBox.SizeMode = PictureBoxSizeMode.StretchImage;
                         }
                     }
                     else
-                    {
-                        // Si no hay imagen, asignar la imagen "libre.png" predeterminada
+                    {                       
                         string rutaImagen = @"C:\Users\crist\Downloads\img\libre.png";
                         picBox.Image = Image.FromFile(rutaImagen);
                         picBox.SizeMode = PictureBoxSizeMode.StretchImage;
                     }
                 }
                 else
-                {
-                    // Si no se encuentra el espacio, asignar la imagen "libre.png"
+                {                    
                     string rutaImagen = @"C:\Users\crist\Downloads\img\libre.png";
                     picBox.Image = Image.FromFile(rutaImagen);
                     picBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -131,18 +120,13 @@ namespace proyectoFinal
                 if (sqlConnection1.State == ConnectionState.Open)
                     sqlConnection1.Close();
             }
-        }
+        }       
 
-
-  
-
-
-
-        private void btnReservar_Click(object sender, EventArgs e)
+        /*private void btnReservar_Click(object sender, EventArgs e)
         {
             frmReservar frmReservar = new frmReservar();
             frmReservar.ShowDialog();
-        }
+        }*/
 
         private void btnPago_Click(object sender, EventArgs e)
         {
@@ -152,8 +136,7 @@ namespace proyectoFinal
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmfactura frmfactura = new frmfactura();
-            frmfactura.ShowDialog();
+          
         }
 
         private void pictureBox1_Click(object sender, EventArgs e) { }
@@ -178,5 +161,34 @@ namespace proyectoFinal
         private void button1_Click_1(object sender, EventArgs e) { }
         private void picR1_Click_1(object sender, EventArgs e) { }
         private void txtIndice_TextChanged(object sender, EventArgs e) { }
+
+        private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tarifasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTarifas frmTarifas = new frmTarifas();
+            frmTarifas.ShowDialog();
+        }
+
+        private void reservarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmReservar frmReservar = new frmReservar();
+            frmReservar.ShowDialog();
+        }
+
+        private void pagarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmcobrar frmcobrar = new frmcobrar();
+            frmcobrar.ShowDialog();
+        }
+
+        private void facturasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAcceso frmAcceso = new frmAcceso();
+            frmAcceso.ShowDialog();
+        }
     }
 }

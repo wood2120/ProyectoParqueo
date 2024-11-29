@@ -17,19 +17,12 @@ namespace proyectoFinal
         public frmReservar()
         {
             InitializeComponent();
-
         }
-
-
-
 
         private void button1_Click(object sender, EventArgs e)
         {
             cancelar();
-
         }
-
-
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -43,36 +36,31 @@ namespace proyectoFinal
         {
             try
             {
-                // Configurar el estado del txtTiempo según el radio button seleccionado
                 if (rb_hora.Checked)
                 {
-                    txtTiempo.Enabled = true; // Permitir escribir en txtTiempo
+                    txtTiempo.Enabled = true; 
                 }
                 else if (rb_dia.Checked)
                 {
-                    txtTiempo.Enabled = false; // No permitir escribir en txtTiempo
-                    txtTiempo.Text = "24"; // Asignar el valor "24" directamente
+                    txtTiempo.Enabled = false; 
+                    txtTiempo.Text = "24"; 
                 }
 
                 sqlConnection1.Open();
-
-                // Determinar el valor de tiempo y tipo_tiempo
+                
                 string tiempo = rb_dia.Checked ? "24" : txtTiempo.Text;
-                string tipoTiempo = rb_dia.Checked ? "Día completo" : "Por hora"; // Ajusta según cómo lo manejes en la base de datos
-
-                // Crear y configurar el comando para SP_GUARDAR_ESPACIO_RESERVA
+                string tipoTiempo = rb_dia.Checked ? "Día completo" : "Por hora"; 
+              
                 SqlCommand comandoEspacio = new SqlCommand("SP_GUARDAR_ESPACIO_RESERVA", sqlConnection1)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-
-                // Parámetros para el procedimiento almacenado
+                
                 comandoEspacio.Parameters.AddWithValue("@placa", string.IsNullOrEmpty(txtPlaca.Text) ? (object)DBNull.Value : txtPlaca.Text);
                 comandoEspacio.Parameters.AddWithValue("@tiempo", string.IsNullOrEmpty(tiempo) ? (object)DBNull.Value : tiempo);
                 comandoEspacio.Parameters.AddWithValue("@tipo_tiempo", string.IsNullOrEmpty(tipoTiempo) ? (object)DBNull.Value : tipoTiempo);
                 comandoEspacio.Parameters.AddWithValue("@espacio", string.IsNullOrEmpty(espacios_seleccionar.Text) ? (object)DBNull.Value : espacios_seleccionar.Text);
-
-                // Determinar el tipo de vehículo
+             
                 string tipoSeleccionado = null;
                 if (rbCarro.Checked)
                     tipoSeleccionado = rbCarro.Text;
@@ -84,8 +72,7 @@ namespace proyectoFinal
                     tipoSeleccionado = rbDiscapacitado.Text;
 
                 comandoEspacio.Parameters.AddWithValue("@tipo", tipoSeleccionado ?? (object)DBNull.Value);
-
-                // Determinar el tipo de reserva
+               
                 string tipoReservaSeleccionado = null;
                 if (rb_reservar.Checked)
                     tipoReservaSeleccionado = rb_reservar.Text;
@@ -93,8 +80,7 @@ namespace proyectoFinal
                     tipoReservaSeleccionado = rb_usar.Text;
 
                 comandoEspacio.Parameters.AddWithValue("@tipo_reserva", tipoReservaSeleccionado ?? (object)DBNull.Value);
-
-                // Ejecutar el procedimiento almacenado
+               
                 SqlDataReader espacios = comandoEspacio.ExecuteReader();
 
                 if (espacios.Read())
@@ -103,10 +89,8 @@ namespace proyectoFinal
                     espacios_seleccionar.Text = espacios["espacio"].ToString();
                 }
 
-                espacios.Close();
-
-                // Deshabilitar el ComboBox después de guardar la reserva
-                espacios_seleccionar.Enabled = false; // Deshabilita la selección de espacio una vez guardado
+                espacios.Close();                
+                espacios_seleccionar.Enabled = false; 
 
             }
             catch (Exception ex)
@@ -123,31 +107,28 @@ namespace proyectoFinal
         private void Guardar_reserva()
         {
             try
-            {
-                // Configurar el estado del txtTiempo según el radio button seleccionado
+            {                
                 if (rb_hora.Checked)
                 {
-                    txtTiempo.Enabled = true; // Permitir escribir en txtTiempo
+                    txtTiempo.Enabled = true;
                 }
                 else if (rb_dia.Checked)
                 {
-                    txtTiempo.Enabled = false; // No permitir escribir en txtTiempo
-                    txtTiempo.Text = "24"; // Asignar el valor "24" directamente
+                    txtTiempo.Enabled = false; 
+                    txtTiempo.Text = "24"; 
                 }
 
                 sqlConnection1.Open();
-
-                // Determinar el valor de tiempo y tipo_tiempo
+               
                 string tiempo = rb_dia.Checked ? "24" : txtTiempo.Text;
-                string tipoTiempo = rb_dia.Checked ? "Día completo" : "Por hora"; // Ajusta según cómo lo manejes en la base de datos
+                string tipoTiempo = rb_dia.Checked ? "Día completo" : "Por hora";
                 SqlCommand comandoEspacio = new SqlCommand("SP_GUARDAR_ESPACIO", sqlConnection1)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
                 comandoEspacio.Parameters.AddWithValue("@espacio",
-                    string.IsNullOrEmpty(espacios_seleccionar.Text) ? (object)DBNull.Value : espacios_seleccionar.Text);
-
-                // Determinar el tipo de reserva y asignar la imagen correspondiente
+                string.IsNullOrEmpty(espacios_seleccionar.Text) ? (object)DBNull.Value : espacios_seleccionar.Text);
+               
                 string tipoReservaSeleccionado = null;
              
                 byte[] imagenBytes = null;
@@ -155,12 +136,12 @@ namespace proyectoFinal
                 if (rb_reservar.Checked)
                 {
                     tipoReservaSeleccionado = rb_reservar.Text;
-                    imagenBytes = ObtenerBytesImagen(@"C:\Users\crist\Downloads\img\descarga.jpg"); // Imagen para "Reservar"
+                    imagenBytes = ObtenerBytesImagen(@"C:\Users\crist\Downloads\img\descarga.jpg"); 
                 }
                 else if (rb_usar.Checked)
                 {
                     tipoReservaSeleccionado = rb_usar.Text;
-                    imagenBytes = ObtenerBytesImagen(@"C:\Users\crist\Downloads\img\ocupado.png"); // Imagen para "Ocupar"
+                    imagenBytes = ObtenerBytesImagen(@"C:\Users\crist\Downloads\img\ocupado.png"); 
                 }
                 comandoEspacio.Parameters.AddWithValue("@placa", string.IsNullOrEmpty(txtPlaca.Text) ? (object)DBNull.Value : txtPlaca.Text);
                 comandoEspacio.Parameters.AddWithValue("@tiempo", string.IsNullOrEmpty(tiempo) ? (object)DBNull.Value : tiempo);
@@ -178,19 +159,15 @@ namespace proyectoFinal
                     tipoSeleccionado = rbDiscapacitado.Text;
 
                 comandoEspacio.Parameters.AddWithValue("@tipo", tipoSeleccionado ?? (object)DBNull.Value);
-
-                // Ejecutar el procedimiento almacenado
+               
                 comandoEspacio.ExecuteNonQuery();
-
-                // Eliminar la opción seleccionada del ComboBox
+               
                 string espacioSeleccionado = espacios_seleccionar.Text;
-
-                // Verificar si el espacio seleccionado está en la lista y eliminarlo
+                
                 if (espacios_seleccionar.Items.Contains(espacioSeleccionado))
                 {
-                    espacios_seleccionar.Items.Remove(espacioSeleccionado); // Eliminar el espacio seleccionado
+                    espacios_seleccionar.Items.Remove(espacioSeleccionado); 
                 }
-
             }
             catch (Exception ex)
             {
@@ -256,30 +233,25 @@ namespace proyectoFinal
 
                 while (espacioReader.Read())
                 {
-
                     if (espacioReader["espacio"] != DBNull.Value)
                     {
                         espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
                     }
                 }
 
-                // Cierra el DataReader
                 espacioReader.Close();
-
-                // Verifica si no se encontraron espacios
+             
                 if (espacios_seleccionar.Items.Count == 0)
                 {
                     MessageBox.Show("No se encontraron espacios disponibles.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
-            {
-                // Muestra un mensaje de error en caso de fallo
+            {                
                 MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
-            {
-                // Asegúrate de cerrar la conexión si está abierta
+            {                
                 if (sqlConnection1.State == ConnectionState.Open)
                 {
                     sqlConnection1.Close();
@@ -292,7 +264,6 @@ namespace proyectoFinal
         {
             try
             {
-
                 if (sqlConnection1.State != ConnectionState.Open)
                 {
                     sqlConnection1.Open();
@@ -307,7 +278,6 @@ namespace proyectoFinal
 
                 while (espacioReader.Read())
                 {
-
                     if (espacioReader["espacio"] != DBNull.Value)
                     {
                         espacios_seleccionar.Items.Add(espacioReader["espacio"].ToString());
@@ -323,12 +293,10 @@ namespace proyectoFinal
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-
                 if (sqlConnection1.State == ConnectionState.Open)
                 {
                     sqlConnection1.Close();
@@ -341,7 +309,6 @@ namespace proyectoFinal
         {
             try
             {
-
                 if (sqlConnection1.State != ConnectionState.Open)
                 {
                     sqlConnection1.Open();
@@ -418,19 +385,16 @@ namespace proyectoFinal
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-
                 if (sqlConnection1.State == ConnectionState.Open)
                 {
                     sqlConnection1.Close();
                 }
             }
             ActualizarLimitePlaca();
-
 
         }
 

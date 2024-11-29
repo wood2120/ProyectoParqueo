@@ -45,12 +45,15 @@
             this.picM2 = new System.Windows.Forms.PictureBox();
             this.picM1 = new System.Windows.Forms.PictureBox();
             this.picM8 = new System.Windows.Forms.PictureBox();
-            this.btnPago = new System.Windows.Forms.Button();
-            this.btnReservar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnfactura = new System.Windows.Forms.Button();
             this.sqlConnection1 = new System.Data.SqlClient.SqlConnection();
             this.picR1 = new System.Windows.Forms.PictureBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.tarifasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reservarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pagarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.facturasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR2)).BeginInit();
@@ -68,22 +71,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.picM1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picM8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR1)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(952, 639);
+            this.pictureBox1.Size = new System.Drawing.Size(1239, 793);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // picR3
             // 
-            this.picR3.Location = new System.Drawing.Point(110, 99);
+            this.picR3.Location = new System.Drawing.Point(145, 99);
             this.picR3.Name = "picR3";
             this.picR3.Size = new System.Drawing.Size(57, 52);
             this.picR3.TabIndex = 1;
@@ -92,7 +96,7 @@
             // 
             // picR2
             // 
-            this.picR2.Location = new System.Drawing.Point(95, 479);
+            this.picR2.Location = new System.Drawing.Point(145, 555);
             this.picR2.Name = "picR2";
             this.picR2.Size = new System.Drawing.Size(57, 52);
             this.picR2.TabIndex = 2;
@@ -101,7 +105,7 @@
             // 
             // picR5
             // 
-            this.picR5.Location = new System.Drawing.Point(440, 99);
+            this.picR5.Location = new System.Drawing.Point(588, 99);
             this.picR5.Name = "picR5";
             this.picR5.Size = new System.Drawing.Size(57, 52);
             this.picR5.TabIndex = 3;
@@ -110,7 +114,7 @@
             // 
             // picR4
             // 
-            this.picR4.Location = new System.Drawing.Point(259, 99);
+            this.picR4.Location = new System.Drawing.Point(360, 99);
             this.picR4.Name = "picR4";
             this.picR4.Size = new System.Drawing.Size(57, 52);
             this.picR4.TabIndex = 4;
@@ -119,7 +123,7 @@
             // 
             // picC1
             // 
-            this.picC1.Location = new System.Drawing.Point(440, 441);
+            this.picC1.Location = new System.Drawing.Point(588, 555);
             this.picC1.Name = "picC1";
             this.picC1.Size = new System.Drawing.Size(57, 52);
             this.picC1.TabIndex = 6;
@@ -128,7 +132,7 @@
             // 
             // picD2
             // 
-            this.picD2.Location = new System.Drawing.Point(627, 441);
+            this.picD2.Location = new System.Drawing.Point(822, 546);
             this.picD2.Name = "picD2";
             this.picD2.Size = new System.Drawing.Size(57, 52);
             this.picD2.TabIndex = 7;
@@ -139,7 +143,7 @@
             // 
             this.picD1.ErrorImage = global::proyectoFinal.Properties.Resources.libre;
             this.picD1.Image = ((System.Drawing.Image)(resources.GetObject("picD1.Image")));
-            this.picD1.Location = new System.Drawing.Point(791, 441);
+            this.picD1.Location = new System.Drawing.Point(1042, 546);
             this.picD1.Name = "picD1";
             this.picD1.Size = new System.Drawing.Size(57, 52);
             this.picD1.TabIndex = 8;
@@ -148,7 +152,7 @@
             // 
             // picM4
             // 
-            this.picM4.Location = new System.Drawing.Point(570, 193);
+            this.picM4.Location = new System.Drawing.Point(748, 273);
             this.picM4.Name = "picM4";
             this.picM4.Size = new System.Drawing.Size(28, 27);
             this.picM4.TabIndex = 9;
@@ -157,7 +161,7 @@
             // 
             // picM3
             // 
-            this.picM3.Location = new System.Drawing.Point(617, 193);
+            this.picM3.Location = new System.Drawing.Point(809, 273);
             this.picM3.Name = "picM3";
             this.picM3.Size = new System.Drawing.Size(28, 27);
             this.picM3.TabIndex = 10;
@@ -166,7 +170,7 @@
             // 
             // picM6
             // 
-            this.picM6.Location = new System.Drawing.Point(617, 69);
+            this.picM6.Location = new System.Drawing.Point(809, 87);
             this.picM6.Name = "picM6";
             this.picM6.Size = new System.Drawing.Size(28, 27);
             this.picM6.TabIndex = 11;
@@ -175,7 +179,7 @@
             // 
             // picM5
             // 
-            this.picM5.Location = new System.Drawing.Point(570, 69);
+            this.picM5.Location = new System.Drawing.Point(748, 87);
             this.picM5.Name = "picM5";
             this.picM5.Size = new System.Drawing.Size(28, 27);
             this.picM5.TabIndex = 12;
@@ -184,7 +188,7 @@
             // 
             // picM7
             // 
-            this.picM7.Location = new System.Drawing.Point(656, 69);
+            this.picM7.Location = new System.Drawing.Point(864, 87);
             this.picM7.Name = "picM7";
             this.picM7.Size = new System.Drawing.Size(28, 27);
             this.picM7.TabIndex = 13;
@@ -193,7 +197,7 @@
             // 
             // picM2
             // 
-            this.picM2.Location = new System.Drawing.Point(656, 193);
+            this.picM2.Location = new System.Drawing.Point(864, 273);
             this.picM2.Name = "picM2";
             this.picM2.Size = new System.Drawing.Size(28, 27);
             this.picM2.TabIndex = 14;
@@ -202,7 +206,7 @@
             // 
             // picM1
             // 
-            this.picM1.Location = new System.Drawing.Point(706, 193);
+            this.picM1.Location = new System.Drawing.Point(924, 273);
             this.picM1.Name = "picM1";
             this.picM1.Size = new System.Drawing.Size(28, 27);
             this.picM1.TabIndex = 15;
@@ -211,62 +215,12 @@
             // 
             // picM8
             // 
-            this.picM8.Location = new System.Drawing.Point(706, 69);
+            this.picM8.Location = new System.Drawing.Point(924, 87);
             this.picM8.Name = "picM8";
             this.picM8.Size = new System.Drawing.Size(28, 27);
             this.picM8.TabIndex = 16;
             this.picM8.TabStop = false;
             this.picM8.Click += new System.EventHandler(this.picM8_Click);
-            // 
-            // btnPago
-            // 
-            this.btnPago.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPago.BackgroundImage")));
-            this.btnPago.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnPago.FlatAppearance.BorderSize = 0;
-            this.btnPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPago.Location = new System.Drawing.Point(958, 54);
-            this.btnPago.Name = "btnPago";
-            this.btnPago.Size = new System.Drawing.Size(91, 82);
-            this.btnPago.TabIndex = 17;
-            this.btnPago.UseVisualStyleBackColor = true;
-            this.btnPago.Click += new System.EventHandler(this.btnPago_Click);
-            // 
-            // btnReservar
-            // 
-            this.btnReservar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnReservar.BackgroundImage")));
-            this.btnReservar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnReservar.FlatAppearance.BorderSize = 0;
-            this.btnReservar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReservar.Location = new System.Drawing.Point(1077, 44);
-            this.btnReservar.Name = "btnReservar";
-            this.btnReservar.Size = new System.Drawing.Size(91, 82);
-            this.btnReservar.TabIndex = 18;
-            this.btnReservar.UseVisualStyleBackColor = true;
-            this.btnReservar.Click += new System.EventHandler(this.btnReservar_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1026, 160);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 221);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Tarifas:\r\n\r\nVehiculo particular:\r\n$2 la hora\r\n$20 todo el dia\r\n\r\nMoto:\r\n$1.5 la h" +
-    "ora\r\n$15 todo el dia\r\n\r\nCamion:\r\n$4 la hora\r\n$40 todo el dia\r\n\r\nDiscapacitado:\r\n" +
-    "$1 la hora\r\n$10 todo el dia\r\n";
-            // 
-            // btnfactura
-            // 
-            this.btnfactura.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnfactura.BackgroundImage")));
-            this.btnfactura.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnfactura.FlatAppearance.BorderSize = 0;
-            this.btnfactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnfactura.Location = new System.Drawing.Point(1029, 449);
-            this.btnfactura.Name = "btnfactura";
-            this.btnfactura.Size = new System.Drawing.Size(91, 82);
-            this.btnfactura.TabIndex = 20;
-            this.btnfactura.UseVisualStyleBackColor = true;
-            this.btnfactura.Click += new System.EventHandler(this.button1_Click);
             // 
             // sqlConnection1
             // 
@@ -276,24 +230,85 @@
             // 
             // picR1
             // 
-            this.picR1.Location = new System.Drawing.Point(259, 481);
+            this.picR1.Location = new System.Drawing.Point(360, 555);
             this.picR1.Name = "picR1";
-            this.picR1.Size = new System.Drawing.Size(100, 50);
+            this.picR1.Size = new System.Drawing.Size(57, 52);
             this.picR1.TabIndex = 23;
             this.picR1.TabStop = false;
             this.picR1.Click += new System.EventHandler(this.picR1_Click_1);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSplitButton1,
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1239, 25);
+            this.toolStrip1.TabIndex = 24;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tarifasToolStripMenuItem,
+            this.reservarToolStripMenuItem1,
+            this.pagarToolStripMenuItem1});
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(32, 22);
+            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
+            this.toolStripSplitButton1.ButtonClick += new System.EventHandler(this.toolStripSplitButton1_ButtonClick);
+            // 
+            // tarifasToolStripMenuItem
+            // 
+            this.tarifasToolStripMenuItem.Name = "tarifasToolStripMenuItem";
+            this.tarifasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tarifasToolStripMenuItem.Text = "Tarifas";
+            this.tarifasToolStripMenuItem.Click += new System.EventHandler(this.tarifasToolStripMenuItem_Click);
+            // 
+            // reservarToolStripMenuItem1
+            // 
+            this.reservarToolStripMenuItem1.Name = "reservarToolStripMenuItem1";
+            this.reservarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.reservarToolStripMenuItem1.Text = "Reservar";
+            this.reservarToolStripMenuItem1.Click += new System.EventHandler(this.reservarToolStripMenuItem1_Click);
+            // 
+            // pagarToolStripMenuItem1
+            // 
+            this.pagarToolStripMenuItem1.Name = "pagarToolStripMenuItem1";
+            this.pagarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.pagarToolStripMenuItem1.Text = "Pagar";
+            this.pagarToolStripMenuItem1.Click += new System.EventHandler(this.pagarToolStripMenuItem1_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.facturasToolStripMenuItem});
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(32, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
+            // facturasToolStripMenuItem
+            // 
+            this.facturasToolStripMenuItem.Name = "facturasToolStripMenuItem";
+            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.facturasToolStripMenuItem.Text = "Facturas";
+            this.facturasToolStripMenuItem.Click += new System.EventHandler(this.facturasToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1180, 637);
+            this.ClientSize = new System.Drawing.Size(1239, 794);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.picR1);
-            this.Controls.Add(this.btnfactura);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnReservar);
-            this.Controls.Add(this.btnPago);
             this.Controls.Add(this.picM8);
             this.Controls.Add(this.picM1);
             this.Controls.Add(this.picM2);
@@ -312,7 +327,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Parqueo";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR3)).EndInit();
@@ -331,6 +346,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picM1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picM8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picR1)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,12 +371,15 @@
         private System.Windows.Forms.PictureBox picM2;
         private System.Windows.Forms.PictureBox picM1;
         private System.Windows.Forms.PictureBox picM8;
-        private System.Windows.Forms.Button btnPago;
-        private System.Windows.Forms.Button btnReservar;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnfactura;
         public System.Data.SqlClient.SqlConnection sqlConnection1;
         private System.Windows.Forms.PictureBox picR1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripMenuItem tarifasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reservarToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem pagarToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSplitButton toolStripButton1;
+        private System.Windows.Forms.ToolStripMenuItem facturasToolStripMenuItem;
     }
 }
 

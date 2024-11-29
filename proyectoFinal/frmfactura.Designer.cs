@@ -35,8 +35,8 @@ namespace proyectoFinal
         private void InitializeComponent()
         {
             this.lstfactura = new System.Windows.Forms.ListView();
-            this.clPlaca = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colIDtipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clPlaca = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colespacio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTiempo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colMonto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -48,8 +48,8 @@ namespace proyectoFinal
             // lstfactura
             // 
             this.lstfactura.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colIDtipo,
             this.clPlaca,
+            this.colIDtipo,
             this.colespacio,
             this.colTiempo,
             this.colMonto});
@@ -62,17 +62,15 @@ namespace proyectoFinal
             this.lstfactura.View = System.Windows.Forms.View.Details;
             this.lstfactura.SelectedIndexChanged += new System.EventHandler(this.lstfactura_SelectedIndexChanged);
             // 
-            // clPlaca
-            // 
-            this.clPlaca.DisplayIndex = 0;
-            this.clPlaca.Text = "Placa";
-            this.clPlaca.Width = 100;
-            // 
             // colIDtipo
             // 
-            this.colIDtipo.DisplayIndex = 1;
             this.colIDtipo.Text = "TIpo";
             this.colIDtipo.Width = 100;
+            // 
+            // clPlaca
+            // 
+            this.clPlaca.Text = "Placa";
+            this.clPlaca.Width = 100;
             // 
             // colespacio
             // 
@@ -128,6 +126,7 @@ namespace proyectoFinal
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lstfactura);
             this.Name = "frmfactura";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Facturas";
             this.Load += new System.EventHandler(this.frmfactura_Load);
             this.ResumeLayout(false);

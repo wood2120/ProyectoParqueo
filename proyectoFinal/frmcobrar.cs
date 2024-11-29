@@ -32,7 +32,7 @@ namespace proyectoFinal
 
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
-            this.Close(); // Cierra la ventana actual
+            this.Close(); 
         }
 
         private void traer_datos_cobro() {
@@ -91,32 +91,32 @@ namespace proyectoFinal
         {
             try
             {
-                // Asegúrate de abrir la conexión antes de ejecutar el procedimiento
+                
                 sqlConnection1.Open();
 
-                // Crear el comando para ejecutar el procedimiento almacenado
+               
                 SqlCommand comando = new SqlCommand("SP_GUARDAR_MONTO", sqlConnection1)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
 
-                // Agregar los parámetros para el procedimiento almacenado
-                comando.Parameters.AddWithValue("@placa", txtPlaca.Text); // Aquí pasas el valor de la placa
+              
+                comando.Parameters.AddWithValue("@placa", txtPlaca.Text); 
                 comando.Parameters.AddWithValue("@monto", string.IsNullOrEmpty(txtMonto.Text) ? (object)DBNull.Value : decimal.Parse(txtMonto.Text));
 
-                // Ejecutar el procedimiento almacenado
+             
                 comando.ExecuteNonQuery();
 
                 
             }
             catch (Exception ex)
             {
-                // Manejo de errores
+              
                 MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
-                // Cerrar la conexión después de la operación
+               
                 if (sqlConnection1.State == ConnectionState.Open)
                     sqlConnection1.Close();
             }

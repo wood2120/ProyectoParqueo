@@ -148,7 +148,7 @@ namespace proyectoFinal
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(120, 40);
             this.btnBuscar.TabIndex = 12;
-            this.btnBuscar.Text = "Cancelar";
+            this.btnBuscar.Text = "Consultar";
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
@@ -202,7 +202,7 @@ namespace proyectoFinal
             this.Name = "frmcobrar";
             this.Text = "Cobrar";
             this.ResumeLayout(false);
-            this.PerformLayout(); 
+            this.PerformLayout();
 
         }
 
