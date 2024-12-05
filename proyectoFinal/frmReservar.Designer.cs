@@ -34,6 +34,7 @@ namespace proyectoFinal
             this.rb_hora = new System.Windows.Forms.RadioButton();
             this.rb_dia = new System.Windows.Forms.RadioButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.label3 = new System.Windows.Forms.Label();
             this.gb_reserva.SuspendLayout();
             this.gb_vehiculo.SuspendLayout();
             this.gb_horario.SuspendLayout();
@@ -44,7 +45,7 @@ namespace proyectoFinal
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
             this.lblTitulo.ForeColor = System.Drawing.Color.Teal;
-            this.lblTitulo.Location = new System.Drawing.Point(150, 20);
+            this.lblTitulo.Location = new System.Drawing.Point(228, 9);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(334, 32);
             this.lblTitulo.TabIndex = 0;
@@ -54,27 +55,28 @@ namespace proyectoFinal
             // lblPlaca
             // 
             this.lblPlaca.AutoSize = true;
-            this.lblPlaca.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblPlaca.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPlaca.Location = new System.Drawing.Point(50, 80);
             this.lblPlaca.Name = "lblPlaca";
-            this.lblPlaca.Size = new System.Drawing.Size(137, 21);
+            this.lblPlaca.Size = new System.Drawing.Size(170, 25);
             this.lblPlaca.TabIndex = 1;
             this.lblPlaca.Text = "Placa del Vehículo:";
             // 
             // txtPlaca
             // 
-            this.txtPlaca.Location = new System.Drawing.Point(199, 80);
+            this.txtPlaca.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPlaca.Location = new System.Drawing.Point(297, 80);
             this.txtPlaca.Name = "txtPlaca";
-            this.txtPlaca.Size = new System.Drawing.Size(200, 20);
+            this.txtPlaca.Size = new System.Drawing.Size(200, 29);
             this.txtPlaca.TabIndex = 2;
             // 
             // lblTipoVehiculo
             // 
             this.lblTipoVehiculo.AutoSize = true;
-            this.lblTipoVehiculo.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblTipoVehiculo.Location = new System.Drawing.Point(50, 130);
+            this.lblTipoVehiculo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoVehiculo.Location = new System.Drawing.Point(50, 136);
             this.lblTipoVehiculo.Name = "lblTipoVehiculo";
-            this.lblTipoVehiculo.Size = new System.Drawing.Size(127, 21);
+            this.lblTipoVehiculo.Size = new System.Drawing.Size(157, 25);
             this.lblTipoVehiculo.TabIndex = 3;
             this.lblTipoVehiculo.Text = "Tipo de Vehículo:";
             // 
@@ -83,7 +85,7 @@ namespace proyectoFinal
             this.rbCarro.AutoSize = true;
             this.rbCarro.Location = new System.Drawing.Point(0, 25);
             this.rbCarro.Name = "rbCarro";
-            this.rbCarro.Size = new System.Drawing.Size(50, 17);
+            this.rbCarro.Size = new System.Drawing.Size(66, 24);
             this.rbCarro.TabIndex = 4;
             this.rbCarro.TabStop = true;
             this.rbCarro.Text = "Carro";
@@ -92,9 +94,9 @@ namespace proyectoFinal
             // rbMoto
             // 
             this.rbMoto.AutoSize = true;
-            this.rbMoto.Location = new System.Drawing.Point(50, 25);
+            this.rbMoto.Location = new System.Drawing.Point(69, 26);
             this.rbMoto.Name = "rbMoto";
-            this.rbMoto.Size = new System.Drawing.Size(49, 17);
+            this.rbMoto.Size = new System.Drawing.Size(63, 24);
             this.rbMoto.TabIndex = 5;
             this.rbMoto.TabStop = true;
             this.rbMoto.Text = "Moto";
@@ -103,9 +105,9 @@ namespace proyectoFinal
             // rbCamion
             // 
             this.rbCamion.AutoSize = true;
-            this.rbCamion.Location = new System.Drawing.Point(105, 25);
+            this.rbCamion.Location = new System.Drawing.Point(148, 26);
             this.rbCamion.Name = "rbCamion";
-            this.rbCamion.Size = new System.Drawing.Size(60, 17);
+            this.rbCamion.Size = new System.Drawing.Size(81, 24);
             this.rbCamion.TabIndex = 6;
             this.rbCamion.TabStop = true;
             this.rbCamion.Text = "Camión";
@@ -114,9 +116,9 @@ namespace proyectoFinal
             // rbDiscapacitado
             // 
             this.rbDiscapacitado.AutoSize = true;
-            this.rbDiscapacitado.Location = new System.Drawing.Point(174, 25);
+            this.rbDiscapacitado.Location = new System.Drawing.Point(243, 26);
             this.rbDiscapacitado.Name = "rbDiscapacitado";
-            this.rbDiscapacitado.Size = new System.Drawing.Size(93, 17);
+            this.rbDiscapacitado.Size = new System.Drawing.Size(128, 24);
             this.rbDiscapacitado.TabIndex = 7;
             this.rbDiscapacitado.TabStop = true;
             this.rbDiscapacitado.Text = "Discapacitado";
@@ -125,20 +127,21 @@ namespace proyectoFinal
             // lblEspacio
             // 
             this.lblEspacio.AutoSize = true;
-            this.lblEspacio.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblEspacio.Location = new System.Drawing.Point(56, 279);
+            this.lblEspacio.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEspacio.Location = new System.Drawing.Point(58, 369);
             this.lblEspacio.Name = "lblEspacio";
-            this.lblEspacio.Size = new System.Drawing.Size(65, 21);
+            this.lblEspacio.Size = new System.Drawing.Size(80, 25);
             this.lblEspacio.TabIndex = 8;
             this.lblEspacio.Text = "Espacio:";
             // 
             // espacios_seleccionar
             // 
             this.espacios_seleccionar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.espacios_seleccionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.espacios_seleccionar.FormattingEnabled = true;
-            this.espacios_seleccionar.Location = new System.Drawing.Point(186, 279);
+            this.espacios_seleccionar.Location = new System.Drawing.Point(297, 369);
             this.espacios_seleccionar.Name = "espacios_seleccionar";
-            this.espacios_seleccionar.Size = new System.Drawing.Size(200, 21);
+            this.espacios_seleccionar.Size = new System.Drawing.Size(200, 28);
             this.espacios_seleccionar.TabIndex = 9;
             // 
             // btnReservar
@@ -146,7 +149,7 @@ namespace proyectoFinal
             this.btnReservar.BackColor = System.Drawing.Color.Teal;
             this.btnReservar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnReservar.ForeColor = System.Drawing.Color.White;
-            this.btnReservar.Location = new System.Drawing.Point(126, 349);
+            this.btnReservar.Location = new System.Drawing.Point(215, 449);
             this.btnReservar.Name = "btnReservar";
             this.btnReservar.Size = new System.Drawing.Size(120, 40);
             this.btnReservar.TabIndex = 10;
@@ -159,7 +162,7 @@ namespace proyectoFinal
             this.btnCancelar.BackColor = System.Drawing.Color.LightGray;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.Color.Black;
-            this.btnCancelar.Location = new System.Drawing.Point(306, 349);
+            this.btnCancelar.Location = new System.Drawing.Point(414, 449);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(120, 40);
             this.btnCancelar.TabIndex = 11;
@@ -175,10 +178,10 @@ namespace proyectoFinal
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label1.Location = new System.Drawing.Point(56, 234);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(58, 311);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 21);
+            this.label1.Size = new System.Drawing.Size(153, 25);
             this.label1.TabIndex = 12;
             this.label1.Text = "Tipo de Reserva :";
             // 
@@ -186,7 +189,8 @@ namespace proyectoFinal
             // 
             this.gb_reserva.Controls.Add(this.rb_usar);
             this.gb_reserva.Controls.Add(this.rb_reservar);
-            this.gb_reserva.Location = new System.Drawing.Point(198, 234);
+            this.gb_reserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gb_reserva.Location = new System.Drawing.Point(297, 297);
             this.gb_reserva.Name = "gb_reserva";
             this.gb_reserva.Size = new System.Drawing.Size(228, 39);
             this.gb_reserva.TabIndex = 13;
@@ -197,7 +201,7 @@ namespace proyectoFinal
             this.rb_usar.AutoSize = true;
             this.rb_usar.Location = new System.Drawing.Point(117, 16);
             this.rb_usar.Name = "rb_usar";
-            this.rb_usar.Size = new System.Drawing.Size(58, 17);
+            this.rb_usar.Size = new System.Drawing.Size(77, 24);
             this.rb_usar.TabIndex = 1;
             this.rb_usar.TabStop = true;
             this.rb_usar.Text = "Normal";
@@ -208,7 +212,7 @@ namespace proyectoFinal
             this.rb_reservar.AutoSize = true;
             this.rb_reservar.Location = new System.Drawing.Point(7, 16);
             this.rb_reservar.Name = "rb_reservar";
-            this.rb_reservar.Size = new System.Drawing.Size(77, 17);
+            this.rb_reservar.Size = new System.Drawing.Size(104, 24);
             this.rb_reservar.TabIndex = 0;
             this.rb_reservar.TabStop = true;
             this.rb_reservar.Text = "Reservado";
@@ -216,9 +220,10 @@ namespace proyectoFinal
             // 
             // txtTiempo
             // 
-            this.txtTiempo.Location = new System.Drawing.Point(186, 307);
+            this.txtTiempo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTiempo.Location = new System.Drawing.Point(297, 255);
             this.txtTiempo.Name = "txtTiempo";
-            this.txtTiempo.Size = new System.Drawing.Size(100, 20);
+            this.txtTiempo.Size = new System.Drawing.Size(153, 29);
             this.txtTiempo.TabIndex = 14;
             // 
             // gb_vehiculo
@@ -227,19 +232,20 @@ namespace proyectoFinal
             this.gb_vehiculo.Controls.Add(this.rbMoto);
             this.gb_vehiculo.Controls.Add(this.rbCamion);
             this.gb_vehiculo.Controls.Add(this.rbDiscapacitado);
-            this.gb_vehiculo.Location = new System.Drawing.Point(192, 106);
+            this.gb_vehiculo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gb_vehiculo.Location = new System.Drawing.Point(297, 115);
             this.gb_vehiculo.Name = "gb_vehiculo";
-            this.gb_vehiculo.Size = new System.Drawing.Size(267, 56);
+            this.gb_vehiculo.Size = new System.Drawing.Size(391, 56);
             this.gb_vehiculo.TabIndex = 15;
             this.gb_vehiculo.TabStop = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label2.Location = new System.Drawing.Point(60, 185);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(58, 198);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 21);
+            this.label2.Size = new System.Drawing.Size(76, 25);
             this.label2.TabIndex = 16;
             this.label2.Text = "Horario";
             // 
@@ -247,9 +253,10 @@ namespace proyectoFinal
             // 
             this.gb_horario.Controls.Add(this.rb_hora);
             this.gb_horario.Controls.Add(this.rb_dia);
-            this.gb_horario.Location = new System.Drawing.Point(186, 175);
+            this.gb_horario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gb_horario.Location = new System.Drawing.Point(297, 177);
             this.gb_horario.Name = "gb_horario";
-            this.gb_horario.Size = new System.Drawing.Size(267, 56);
+            this.gb_horario.Size = new System.Drawing.Size(226, 56);
             this.gb_horario.TabIndex = 17;
             this.gb_horario.TabStop = false;
             // 
@@ -258,7 +265,7 @@ namespace proyectoFinal
             this.rb_hora.AutoSize = true;
             this.rb_hora.Location = new System.Drawing.Point(19, 25);
             this.rb_hora.Name = "rb_hora";
-            this.rb_hora.Size = new System.Drawing.Size(48, 17);
+            this.rb_hora.Size = new System.Drawing.Size(62, 24);
             this.rb_hora.TabIndex = 6;
             this.rb_hora.TabStop = true;
             this.rb_hora.Text = "Hora";
@@ -268,14 +275,25 @@ namespace proyectoFinal
             this.rb_dia.AutoSize = true;
             this.rb_dia.Location = new System.Drawing.Point(94, 25);
             this.rb_dia.Name = "rb_dia";
-            this.rb_dia.Size = new System.Drawing.Size(80, 17);
+            this.rb_dia.Size = new System.Drawing.Size(104, 24);
             this.rb_dia.TabIndex = 7;
             this.rb_dia.TabStop = true;
             this.rb_dia.Text = "Todo el día";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(58, 259);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 25);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Tiempo:";
+            // 
             // frmReservar
             // 
-            this.ClientSize = new System.Drawing.Size(632, 453);
+            this.ClientSize = new System.Drawing.Size(812, 566);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.gb_horario);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.gb_vehiculo);
@@ -328,5 +346,6 @@ namespace proyectoFinal
         private RadioButton rb_hora;
         private RadioButton rb_dia;
         private ColorDialog colorDialog1;
+        private Label label3;
     }
 }
