@@ -44,7 +44,7 @@ namespace proyectoFinal
             // 
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.ForeColor = System.Drawing.Color.Teal;
+            this.lblTitulo.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.lblTitulo.Location = new System.Drawing.Point(228, 9);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(334, 32);
@@ -55,10 +55,10 @@ namespace proyectoFinal
             // lblPlaca
             // 
             this.lblPlaca.AutoSize = true;
-            this.lblPlaca.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlaca.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPlaca.Location = new System.Drawing.Point(50, 80);
             this.lblPlaca.Name = "lblPlaca";
-            this.lblPlaca.Size = new System.Drawing.Size(170, 25);
+            this.lblPlaca.Size = new System.Drawing.Size(176, 25);
             this.lblPlaca.TabIndex = 1;
             this.lblPlaca.Text = "Placa del Vehículo:";
             // 
@@ -67,16 +67,16 @@ namespace proyectoFinal
             this.txtPlaca.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPlaca.Location = new System.Drawing.Point(297, 80);
             this.txtPlaca.Name = "txtPlaca";
-            this.txtPlaca.Size = new System.Drawing.Size(200, 29);
+            this.txtPlaca.Size = new System.Drawing.Size(226, 29);
             this.txtPlaca.TabIndex = 2;
             // 
             // lblTipoVehiculo
             // 
             this.lblTipoVehiculo.AutoSize = true;
-            this.lblTipoVehiculo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoVehiculo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTipoVehiculo.Location = new System.Drawing.Point(50, 136);
             this.lblTipoVehiculo.Name = "lblTipoVehiculo";
-            this.lblTipoVehiculo.Size = new System.Drawing.Size(157, 25);
+            this.lblTipoVehiculo.Size = new System.Drawing.Size(165, 25);
             this.lblTipoVehiculo.TabIndex = 3;
             this.lblTipoVehiculo.Text = "Tipo de Vehículo:";
             // 
@@ -127,10 +127,10 @@ namespace proyectoFinal
             // lblEspacio
             // 
             this.lblEspacio.AutoSize = true;
-            this.lblEspacio.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEspacio.Location = new System.Drawing.Point(58, 369);
+            this.lblEspacio.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEspacio.Location = new System.Drawing.Point(50, 369);
             this.lblEspacio.Name = "lblEspacio";
-            this.lblEspacio.Size = new System.Drawing.Size(80, 25);
+            this.lblEspacio.Size = new System.Drawing.Size(83, 25);
             this.lblEspacio.TabIndex = 8;
             this.lblEspacio.Text = "Espacio:";
             // 
@@ -146,7 +146,7 @@ namespace proyectoFinal
             // 
             // btnReservar
             // 
-            this.btnReservar.BackColor = System.Drawing.Color.Teal;
+            this.btnReservar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnReservar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnReservar.ForeColor = System.Drawing.Color.White;
             this.btnReservar.Location = new System.Drawing.Point(215, 449);
@@ -168,6 +168,7 @@ namespace proyectoFinal
             this.btnCancelar.TabIndex = 11;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // sqlConnection1
             // 
@@ -178,10 +179,10 @@ namespace proyectoFinal
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(58, 311);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(50, 311);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 25);
+            this.label1.Size = new System.Drawing.Size(163, 25);
             this.label1.TabIndex = 12;
             this.label1.Text = "Tipo de Reserva :";
             // 
@@ -242,10 +243,10 @@ namespace proyectoFinal
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(58, 198);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(50, 200);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 25);
+            this.label2.Size = new System.Drawing.Size(82, 25);
             this.label2.TabIndex = 16;
             this.label2.Text = "Horario";
             // 
@@ -283,10 +284,10 @@ namespace proyectoFinal
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(58, 259);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(48, 259);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 25);
+            this.label3.Size = new System.Drawing.Size(84, 25);
             this.label3.TabIndex = 18;
             this.label3.Text = "Tiempo:";
             // 

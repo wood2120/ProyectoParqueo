@@ -162,33 +162,30 @@ namespace proyectoFinal
         private void picR1_Click_1(object sender, EventArgs e) { }
         private void txtIndice_TextChanged(object sender, EventArgs e) { }
 
-        private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
-        {
+      
 
-        }
-
-        private void tarifasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmTarifas frmTarifas = new frmTarifas();
-            frmTarifas.ShowDialog();
-        }
-
-        private void reservarToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
         {
             frmReservar frmReservar = new frmReservar();
             frmReservar.ShowDialog();
         }
 
-        private void pagarToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            frmAcceso frmAcceso = new frmAcceso();
+            frmAcceso.ShowDialog();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
         {
             frmcobrar frmcobrar = new frmcobrar();
             frmcobrar.ShowDialog();
         }
 
-        private void facturasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            frmAcceso frmAcceso = new frmAcceso();
-            frmAcceso.ShowDialog();
+            frmTarifas frmTarifas = new frmTarifas();
+            frmTarifas.ShowDialog();
         }
     }
 }

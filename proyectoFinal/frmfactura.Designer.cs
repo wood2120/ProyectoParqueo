@@ -35,8 +35,8 @@ namespace proyectoFinal
         private void InitializeComponent()
         {
             this.lstfactura = new System.Windows.Forms.ListView();
-            this.colIDtipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clPlaca = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colIDtipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colespacio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTiempo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colMonto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -54,7 +54,7 @@ namespace proyectoFinal
             this.colTiempo,
             this.colMonto});
             this.lstfactura.HideSelection = false;
-            this.lstfactura.Location = new System.Drawing.Point(63, 56);
+            this.lstfactura.Location = new System.Drawing.Point(60, 60);
             this.lstfactura.Name = "lstfactura";
             this.lstfactura.Size = new System.Drawing.Size(692, 360);
             this.lstfactura.TabIndex = 0;
@@ -62,15 +62,15 @@ namespace proyectoFinal
             this.lstfactura.View = System.Windows.Forms.View.Details;
             this.lstfactura.SelectedIndexChanged += new System.EventHandler(this.lstfactura_SelectedIndexChanged);
             // 
-            // colIDtipo
-            // 
-            this.colIDtipo.Text = "TIpo";
-            this.colIDtipo.Width = 100;
-            // 
             // clPlaca
             // 
             this.clPlaca.Text = "Placa";
             this.clPlaca.Width = 100;
+            // 
+            // colIDtipo
+            // 
+            this.colIDtipo.Text = "TIpo";
+            this.colIDtipo.Width = 100;
             // 
             // colespacio
             // 
@@ -97,19 +97,19 @@ namespace proyectoFinal
             // 
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.ForeColor = System.Drawing.Color.Teal;
-            this.lblTitulo.Location = new System.Drawing.Point(254, 21);
+            this.lblTitulo.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblTitulo.Location = new System.Drawing.Point(331, 9);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(240, 32);
+            this.lblTitulo.Size = new System.Drawing.Size(115, 32);
             this.lblTitulo.TabIndex = 1;
-            this.lblTitulo.Text = "Facturas Pendientes";
+            this.lblTitulo.Text = "Facturas ";
             // 
             // btnCerrar
             // 
             this.btnCerrar.BackColor = System.Drawing.Color.Gray;
             this.btnCerrar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnCerrar.ForeColor = System.Drawing.Color.White;
-            this.btnCerrar.Location = new System.Drawing.Point(315, 448);
+            this.btnCerrar.Location = new System.Drawing.Point(353, 448);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(120, 40);
             this.btnCerrar.TabIndex = 2;

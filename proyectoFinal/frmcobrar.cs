@@ -205,6 +205,14 @@ namespace proyectoFinal
         {
 
         }
+
+        private void btnCancelar_Click_2(object sender, EventArgs e)
+        {
+            txtPlaca.Clear();
+            txtEspacio.Clear();
+            txtTiempo.Clear();
+            txtMonto.Clear();
+        }
     }
 }
 ;

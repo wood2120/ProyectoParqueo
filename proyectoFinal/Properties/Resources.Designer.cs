@@ -63,6 +63,46 @@ namespace proyectoFinal.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap descarga {
+            get {
+                object obj = ResourceManager.GetObject("descarga", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Imagen_de_WhatsApp_2024_12_05_a_las_12_38_53_2cd5df9f {
+            get {
+                object obj = ResourceManager.GetObject("Imagen de WhatsApp 2024-12-05 a las 12.38.53_2cd5df9f", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Imagen_de_WhatsApp_2024_12_05_a_las_12_38_54_a6e34ead {
+            get {
+                object obj = ResourceManager.GetObject("Imagen de WhatsApp 2024-12-05 a las 12.38.54_a6e34ead", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Imagen_de_WhatsApp_2024_12_05_a_las_12_38_54_c899b77d {
+            get {
+                object obj = ResourceManager.GetObject("Imagen de WhatsApp 2024-12-05 a las 12.38.54_c899b77d", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap libre {
             get {
                 object obj = ResourceManager.GetObject("libre", resourceCulture);

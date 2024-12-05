@@ -431,7 +431,13 @@ namespace proyectoFinal
             }
         }
 
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            txtPlaca.Clear();
+            txtTiempo.Clear();
+            
 
+        }
     }
 }
 
