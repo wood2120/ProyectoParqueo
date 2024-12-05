@@ -42,6 +42,10 @@ namespace proyectoFinal
             this.txtEspacio = new System.Windows.Forms.TextBox();
             this.txtTiempo = new System.Windows.Forms.TextBox();
             this.txtMonto = new System.Windows.Forms.TextBox();
+            this.txtvuelto = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtpago = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // sqlConnection1
@@ -65,7 +69,7 @@ namespace proyectoFinal
             // 
             this.lblMonto.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMonto.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblMonto.Location = new System.Drawing.Point(126, 243);
+            this.lblMonto.Location = new System.Drawing.Point(125, 249);
             this.lblMonto.Name = "lblMonto";
             this.lblMonto.Size = new System.Drawing.Size(227, 52);
             this.lblMonto.TabIndex = 1;
@@ -75,7 +79,7 @@ namespace proyectoFinal
             // lblDato
             // 
             this.lblDato.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDato.Location = new System.Drawing.Point(173, 191);
+            this.lblDato.Location = new System.Drawing.Point(155, 196);
             this.lblDato.Name = "lblDato";
             this.lblDato.Size = new System.Drawing.Size(180, 30);
             this.lblDato.TabIndex = 2;
@@ -86,7 +90,7 @@ namespace proyectoFinal
             // lblEspacioSeleccionado
             // 
             this.lblEspacioSeleccionado.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEspacioSeleccionado.Location = new System.Drawing.Point(153, 150);
+            this.lblEspacioSeleccionado.Location = new System.Drawing.Point(155, 140);
             this.lblEspacioSeleccionado.Name = "lblEspacioSeleccionado";
             this.lblEspacioSeleccionado.Size = new System.Drawing.Size(224, 30);
             this.lblEspacioSeleccionado.TabIndex = 3;
@@ -98,7 +102,7 @@ namespace proyectoFinal
             this.btnCobrar.BackColor = System.Drawing.Color.Teal;
             this.btnCobrar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnCobrar.ForeColor = System.Drawing.Color.White;
-            this.btnCobrar.Location = new System.Drawing.Point(354, 319);
+            this.btnCobrar.Location = new System.Drawing.Point(440, 509);
             this.btnCobrar.Name = "btnCobrar";
             this.btnCobrar.Size = new System.Drawing.Size(141, 55);
             this.btnCobrar.TabIndex = 4;
@@ -111,7 +115,7 @@ namespace proyectoFinal
             this.btnCancelar.BackColor = System.Drawing.Color.LightGray;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.Color.Black;
-            this.btnCancelar.Location = new System.Drawing.Point(703, 334);
+            this.btnCancelar.Location = new System.Drawing.Point(820, 547);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(120, 40);
             this.btnCancelar.TabIndex = 5;
@@ -156,7 +160,7 @@ namespace proyectoFinal
             // 
             this.txtEspacio.AccessibleDescription = "";
             this.txtEspacio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEspacio.Location = new System.Drawing.Point(399, 152);
+            this.txtEspacio.Location = new System.Drawing.Point(399, 140);
             this.txtEspacio.Multiline = true;
             this.txtEspacio.Name = "txtEspacio";
             this.txtEspacio.Size = new System.Drawing.Size(235, 30);
@@ -166,7 +170,7 @@ namespace proyectoFinal
             // 
             this.txtTiempo.AccessibleDescription = "";
             this.txtTiempo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTiempo.Location = new System.Drawing.Point(399, 210);
+            this.txtTiempo.Location = new System.Drawing.Point(399, 196);
             this.txtTiempo.Multiline = true;
             this.txtTiempo.Name = "txtTiempo";
             this.txtTiempo.Size = new System.Drawing.Size(235, 30);
@@ -182,11 +186,57 @@ namespace proyectoFinal
             this.txtMonto.Size = new System.Drawing.Size(235, 30);
             this.txtMonto.TabIndex = 15;
             // 
+            // txtvuelto
+            // 
+            this.txtvuelto.AccessibleDescription = "";
+            this.txtvuelto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtvuelto.Location = new System.Drawing.Point(395, 404);
+            this.txtvuelto.Multiline = true;
+            this.txtvuelto.Name = "txtvuelto";
+            this.txtvuelto.Size = new System.Drawing.Size(235, 30);
+            this.txtvuelto.TabIndex = 17;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label2.Location = new System.Drawing.Point(125, 316);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(227, 52);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Pago:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtpago
+            // 
+            this.txtpago.AccessibleDescription = "";
+            this.txtpago.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtpago.Location = new System.Drawing.Point(399, 338);
+            this.txtpago.Multiline = true;
+            this.txtpago.Name = "txtpago";
+            this.txtpago.Size = new System.Drawing.Size(235, 30);
+            this.txtpago.TabIndex = 19;
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label3.Location = new System.Drawing.Point(125, 388);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(227, 52);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Vuelto:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmcobrar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 407);
+            this.ClientSize = new System.Drawing.Size(952, 599);
+            this.Controls.Add(this.txtpago);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtvuelto);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtMonto);
             this.Controls.Add(this.txtTiempo);
             this.Controls.Add(this.txtEspacio);
@@ -201,6 +251,7 @@ namespace proyectoFinal
             this.Controls.Add(this.lblTitulo);
             this.Name = "frmcobrar";
             this.Text = "Cobrar";
+            this.Load += new System.EventHandler(this.frmcobrar_Load_3);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,11 +259,12 @@ namespace proyectoFinal
 
         private void btnCobrar_Click(object sender, EventArgs e)
         {
-            // Aquí realizamos una acción al cobrar, por ejemplo, actualizar el monto
-            MessageBox.Show("El cobro ha sido realizado exitosamente.", "Cobrar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            GuardarMonto();
+           
+            
+           GuardarMonto();
             borrar_espacio();
             this.Close();
+            //cobro();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -231,5 +283,9 @@ namespace proyectoFinal
         private TextBox txtEspacio;
         private TextBox txtTiempo;
         private TextBox txtMonto;
+        private TextBox txtvuelto;
+        private Label label2;
+        private TextBox txtpago;
+        private Label label3;
     }
 }

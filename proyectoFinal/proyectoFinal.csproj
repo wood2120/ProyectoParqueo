@@ -70,12 +70,6 @@
     <Compile Include="frmfactura.Designer.cs">
       <DependentUpon>frmfactura.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmrealizar_cobro.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmrealizar_cobro.Designer.cs">
-      <DependentUpon>frmrealizar_cobro.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmTarifas.cs">
       <SubType>Form</SubType>
     </Compile>
