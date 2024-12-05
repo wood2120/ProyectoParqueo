@@ -292,7 +292,7 @@ namespace proyectoFinal
             // 
             // frmReservar
             // 
-            this.ClientSize = new System.Drawing.Size(812, 566);
+            this.ClientSize = new System.Drawing.Size(755, 525);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.gb_horario);
             this.Controls.Add(this.label2);
