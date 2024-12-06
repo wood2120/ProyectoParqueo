@@ -35,15 +35,18 @@ namespace proyectoFinal
             else
             {
                 MessageBox.Show("contraseña incorrecta", "Mensaje de Error",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-        
+                MessageBoxButtons.OK, MessageBoxIcon.Error);        
             }
         }
 
         private void txtAcceso_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void frmAcceso_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

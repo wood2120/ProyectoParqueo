@@ -98,14 +98,12 @@ namespace proyectoFinal
             decimal monto;
             decimal pago;
 
-            // Validar que los campos de texto sean números válidos
             if (!decimal.TryParse(txtMonto.Text, out monto) || !decimal.TryParse(txtpago.Text, out pago))
             {
                 MessageBox.Show("Por favor, ingresa valores numéricos válidos en los campos de monto y pago.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Validar si el pago es menor que el monto
             if (pago < monto)
             {
                 decimal falta = monto - pago;
@@ -113,14 +111,12 @@ namespace proyectoFinal
                 return;
             }
 
-            // Calcular el vuelto si el pago es mayor al monto
             if (pago > monto)
             {
                 decimal vuelto = pago - monto;
                 MessageBox.Show("Tu cambio es " + vuelto.ToString("F2") + ".", "Pago Excedente", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            // Guardar el monto en la base de datos
+            
             try
             {
                 sqlConnection1.Open();

@@ -122,11 +122,7 @@ namespace proyectoFinal
             }
         }       
 
-        /*private void btnReservar_Click(object sender, EventArgs e)
-        {
-            frmReservar frmReservar = new frmReservar();
-            frmReservar.ShowDialog();
-        }*/
+        
 
         private void btnPago_Click(object sender, EventArgs e)
         {

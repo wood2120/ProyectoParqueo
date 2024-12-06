@@ -73,6 +73,7 @@
             this.Controls.Add(this.btnAcceso);
             this.Name = "frmAcceso";
             this.Text = "Acceso";
+            this.Load += new System.EventHandler(this.frmAcceso_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

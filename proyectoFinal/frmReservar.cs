@@ -198,9 +198,7 @@ namespace proyectoFinal
         {
 
             txtPlaca.Clear();
-            espacios_seleccionar.Select();
-            //gb_vehiculo.Checked = false;
-            //gb_reserva.Enabled = false;
+            espacios_seleccionar.Select();          
             txtPlaca.Focus();
 
         }
@@ -342,6 +340,7 @@ namespace proyectoFinal
             {
 
                 MessageBox.Show($"Error al cargar los espacios: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
             finally
             {
@@ -436,8 +435,7 @@ namespace proyectoFinal
         {
             txtPlaca.Focus();
             txtPlaca.Clear();
-            txtTiempo.Clear();
-            
+            txtTiempo.Clear();           
 
         }
 

@@ -13,12 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace proyectoFinal
 {
     public partial class frmfactura : Form
-    {
-       /*public frmfactura()
-        {
-            InitializeComponent();
-        }*/
-
+    {      
        
         private void lstfactura_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -47,10 +42,8 @@ namespace proyectoFinal
                 while (reader.Read())
                 {
                    
-                    ListViewItem item = new ListViewItem(reader["placa"].ToString());
-                   
-                    // areeglar esta picha
-
+                    ListViewItem item = new ListViewItem(reader["placa"].ToString());                 
+                 
                     item.SubItems.Add(reader["tipo"].ToString());
                     item.SubItems.Add(reader["espacio"].ToString());
                     item.SubItems.Add(reader["tiempo"].ToString());
