@@ -69,6 +69,7 @@ namespace proyectoFinal
             this.txtPlaca.Name = "txtPlaca";
             this.txtPlaca.Size = new System.Drawing.Size(226, 29);
             this.txtPlaca.TabIndex = 2;
+            this.txtPlaca.TextChanged += new System.EventHandler(this.txtPlaca_TextChanged);
             // 
             // lblTipoVehiculo
             // 
@@ -110,7 +111,7 @@ namespace proyectoFinal
             this.rbCamion.Size = new System.Drawing.Size(81, 24);
             this.rbCamion.TabIndex = 6;
             this.rbCamion.TabStop = true;
-            this.rbCamion.Text = "Camión";
+            this.rbCamion.Text = "Camion";
             this.rbCamion.CheckedChanged += new System.EventHandler(this.rbCamion_CheckedChanged);
             // 
             // rbDiscapacitado

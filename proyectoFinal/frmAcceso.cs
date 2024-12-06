@@ -15,6 +15,7 @@ namespace proyectoFinal
         public frmAcceso()
         {
             InitializeComponent();
+            txtAcceso.Focus();
         }
 
         private void btnAcceso_Click(object sender, EventArgs e)
@@ -38,6 +39,11 @@ namespace proyectoFinal
 
         
             }
+        }
+
+        private void txtAcceso_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

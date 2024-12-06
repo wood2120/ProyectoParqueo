@@ -239,7 +239,7 @@ namespace proyectoFinal
             
            GuardarMonto();
             borrar_espacio();
-            this.Close();
+            
             //cobro();
         }
 

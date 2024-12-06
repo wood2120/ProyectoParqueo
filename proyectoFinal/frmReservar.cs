@@ -17,6 +17,7 @@ namespace proyectoFinal
         public frmReservar()
         {
             InitializeComponent();
+            txtPlaca.Focus();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -433,10 +434,16 @@ namespace proyectoFinal
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            txtPlaca.Focus();
             txtPlaca.Clear();
             txtTiempo.Clear();
             
 
+        }
+
+        private void txtPlaca_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

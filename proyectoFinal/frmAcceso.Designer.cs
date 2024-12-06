@@ -61,6 +61,7 @@
             this.txtAcceso.PasswordChar = '*';
             this.txtAcceso.Size = new System.Drawing.Size(227, 31);
             this.txtAcceso.TabIndex = 3;
+            this.txtAcceso.TextChanged += new System.EventHandler(this.txtAcceso_TextChanged);
             // 
             // frmAcceso
             // 

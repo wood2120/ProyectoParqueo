@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -17,6 +18,7 @@ namespace proyectoFinal
         public frmcobrar()
         {
             InitializeComponent();
+            txtPlaca.Focus();
         }
 
         private void frmcobrar_Load(object sender, EventArgs e)
@@ -93,64 +95,59 @@ namespace proyectoFinal
 
         private void GuardarMonto()
         {
-            decimal monto, pago;
+            decimal monto;
+            decimal pago;
 
-            // Intentar convertir los valores de txtMonto y txtpago a decimal
-            if (decimal.TryParse(txtMonto.Text, out monto) && decimal.TryParse(txtpago.Text, out pago))
+            // Intentar convertir los textos a valores decimales
+            if (!decimal.TryParse(txtMonto.Text, out monto) || !decimal.TryParse(txtpago.Text, out pago))
             {
-                // Verificar si el pago es menor que el monto
-                if (pago < monto)
-                {
-                    // Si el pago es inferior al monto, mostrar el mensaje y no guardar
-                    decimal falta = monto - pago;
-                    MessageBox.Show("Te falta " + falta.ToString("F2") + " para completar el pago.");
-                }
-                else
-                {
-                    // Si el pago es igual o mayor al monto, guardar el monto
-                    try
-                    {
-                        sqlConnection1.Open();
-
-                        // Preparar el comando para ejecutar el procedimiento almacenado
-                        SqlCommand comando = new SqlCommand("SP_GUARDAR_MONTO", sqlConnection1)
-                        {
-                            CommandType = CommandType.StoredProcedure
-                        };
-
-                        // Agregar parámetros al comando
-                        comando.Parameters.AddWithValue("@placa", txtPlaca.Text);
-                        comando.Parameters.AddWithValue("@monto", string.IsNullOrEmpty(txtMonto.Text) ? (object)DBNull.Value : decimal.Parse(txtMonto.Text));
-
-                        // Ejecutar el comando
-                        comando.ExecuteNonQuery();
-
-                        // Mostrar mensaje de éxito
-                        MessageBox.Show("El monto ha sido guardado exitosamente.", "Guardar Monto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        // Manejo de errores
-                        MessageBox.Show("Error: " + ex.Message);
-                    }
-                    finally
-                    {
-                        // Asegurarse de cerrar la conexión
-                        if (sqlConnection1.State == ConnectionState.Open)
-                            sqlConnection1.Close();
-                    }
-                }
+                MessageBox.Show("Por favor, ingresa valores numéricos válidos en los campos de monto y pago.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
+
+            // Verificar que el pago sea suficiente
+            if (pago < monto)
             {
-                // Si no se pueden convertir los valores, mostrar un error
-                MessageBox.Show("Por favor, ingresa valores numéricos válidos en los campos de Monto y Pago.");
+                decimal falta = monto - pago;
+                MessageBox.Show("Te falta " + falta.ToString("F2") + " para completar el pago.", "Pago Insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Salir de la función si el pago no es suficiente
+            }
+
+            // Proceder al guardado si el pago es suficiente
+            try
+            {
+                // Abrir la conexión
+                sqlConnection1.Open();
+
+                // Crear el comando para el procedimiento almacenado
+                SqlCommand comando = new SqlCommand("SP_GUARDAR_MONTO", sqlConnection1)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                // Agregar parámetros
+                comando.Parameters.AddWithValue("@placa", txtPlaca.Text);
+                comando.Parameters.AddWithValue("@monto", monto);
+
+                // Ejecutar el comando
+                comando.ExecuteNonQuery();
+
+                // Confirmar éxito al usuario
+                MessageBox.Show("El monto ha sido guardado exitosamente.", "Guardar Monto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                MessageBox.Show("Error al guardar el monto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Cerrar la conexión si está abierta
+                if (sqlConnection1.State == ConnectionState.Open)
+                    sqlConnection1.Close();
             }
         }
-
-
-
-
 
 
 
@@ -189,17 +186,14 @@ namespace proyectoFinal
 
         private void txtPlaca_TextChanged(object sender, EventArgs e)
         {
-
+            txtPlaca.Focus();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             traer_datos_cobro();
-            traer_datos_monto();
-           
-
-
-        }
+            traer_datos_monto();         
+         }
 
         private void frmcobrar_Load_3(object sender, EventArgs e)
         {
@@ -208,10 +202,13 @@ namespace proyectoFinal
 
         private void btnCancelar_Click_2(object sender, EventArgs e)
         {
+            txtPlaca.Focus();
             txtPlaca.Clear();
             txtEspacio.Clear();
             txtTiempo.Clear();
             txtMonto.Clear();
+            txtpago.Clear();
+
         }
     }
 }
