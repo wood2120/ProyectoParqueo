@@ -98,56 +98,57 @@ namespace proyectoFinal
             decimal monto;
             decimal pago;
 
-            // Intentar convertir los textos a valores decimales
+            // Validar que los campos de texto sean números válidos
             if (!decimal.TryParse(txtMonto.Text, out monto) || !decimal.TryParse(txtpago.Text, out pago))
             {
                 MessageBox.Show("Por favor, ingresa valores numéricos válidos en los campos de monto y pago.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Verificar que el pago sea suficiente
+            // Validar si el pago es menor que el monto
             if (pago < monto)
             {
                 decimal falta = monto - pago;
                 MessageBox.Show("Te falta " + falta.ToString("F2") + " para completar el pago.", "Pago Insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Salir de la función si el pago no es suficiente
+                return;
             }
 
-            // Proceder al guardado si el pago es suficiente
+            // Calcular el vuelto si el pago es mayor al monto
+            if (pago > monto)
+            {
+                decimal vuelto = pago - monto;
+                MessageBox.Show("Tu cambio es " + vuelto.ToString("F2") + ".", "Pago Excedente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            // Guardar el monto en la base de datos
             try
             {
-                // Abrir la conexión
                 sqlConnection1.Open();
 
-                // Crear el comando para el procedimiento almacenado
                 SqlCommand comando = new SqlCommand("SP_GUARDAR_MONTO", sqlConnection1)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
 
-                // Agregar parámetros
                 comando.Parameters.AddWithValue("@placa", txtPlaca.Text);
                 comando.Parameters.AddWithValue("@monto", monto);
 
-                // Ejecutar el comando
                 comando.ExecuteNonQuery();
 
-                // Confirmar éxito al usuario
                 MessageBox.Show("El monto ha sido guardado exitosamente.", "Guardar Monto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             catch (Exception ex)
             {
-                // Manejo de errores
                 MessageBox.Show("Error al guardar el monto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                // Cerrar la conexión si está abierta
                 if (sqlConnection1.State == ConnectionState.Open)
                     sqlConnection1.Close();
             }
         }
+
 
 
 

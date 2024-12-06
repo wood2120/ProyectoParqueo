@@ -72,7 +72,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnAcceso);
             this.Name = "frmAcceso";
-            this.Text = "frmAcceso";
+            this.Text = "Acceso";
             this.ResumeLayout(false);
             this.PerformLayout();
 
